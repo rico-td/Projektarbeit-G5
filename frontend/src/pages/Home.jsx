@@ -1,9 +1,9 @@
 // -------------- STYLE -----------------
+import CurrentCity from "../components/CurrentCity/CurrentCity";
 import style from "./Home.module.css";
 // -------------- LOGIC -----------------
 
 // -------------- ELEMENTS -----------------
-
 
 function Home() {
   return (
@@ -17,6 +17,8 @@ function Home() {
       >
         Home Page
         </h2>
+
+        <CurrentCity />
     </div>
   );
 }

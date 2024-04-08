@@ -1,0 +1,13 @@
+.currentCity {
+
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.date {
+    display: flex;
+    justify-content: center;
+    line-height: 10px;
+    
+}
