@@ -51,6 +51,17 @@ let weather = [
 console.log(weather);
 const WeatherRouter = Router();
 
+// add the data into sql workbench
+async function addWeatherData() {
+  try {
+    await WeatherModel.bulkCreate(weather);
+  } catch (error) {
+    console.log("error occured during add data");
+  }
+}
+
+addWeatherData();
+
 // // GET - /weather/all: Return all Weather
 // WeatherRouter.get("/all", async (req, res) => {
 //   const Weather = await WeatherModel.findAll();
@@ -60,6 +71,7 @@ const WeatherRouter = Router();
 // Define a GET route handler to get all data
 WeatherRouter.get("/all", async (req, res) => {
   try {
+
     // Call the asynchronous function to fetch data from the database
     const Weather = await WeatherModel.findAll();
     // Send the fetched data as a JSON response
