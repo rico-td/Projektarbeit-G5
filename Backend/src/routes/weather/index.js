@@ -5,7 +5,7 @@ const WeatherModel = require("../../database/models/WeatherModel");
 const { where } = require("sequelize");
 
 // Simulated database for weather
-let weather = [
+let weather_tb = [
   {
     id: 1,
     timestamp: "2024-03-23",
@@ -48,7 +48,7 @@ let weather = [
   },
 ];
 
-console.log(weather);
+console.log(weather_tb);
 const WeatherRouter = Router();
 
 // // GET - /weather/all: Return all Weather
@@ -61,9 +61,9 @@ const WeatherRouter = Router();
 WeatherRouter.get("/all", async (req, res) => {
   try {
     // Call the asynchronous function to fetch data from the database
-    const Weather = await WeatherModel.findAll();
+    const weather = await WeatherModel.findAll();
     // Send the fetched data as a JSON response
-    res.json(weather);
+    res.json(weather_tb);
   } catch (error) {
     // Handle errors
     console.error("Error fetching data:", error);
@@ -78,7 +78,7 @@ WeatherRouter.get("/id", (req, res) => {
     res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
     return;
   }
-  const User_weather = weather.find((item) => item.id === WeatherId);
+  const User_weather = weather_tb.find((item) => item.id === WeatherId);
   res.status(StatusCodes.OK).json({ weather: User_weather });
 });
 
@@ -148,43 +148,28 @@ WeatherRouter.delete("/delete", async (req, res) => {
 //     });
 // });
 
-// // POST - /todos/create: Create todo
-// WeatherRouter.post("/create", async (req, res) => {
-//   const { newTask, newIsDone, newDueDate, userId } = req.body;
-//   const newTodo = {
-//     task: newTask,
-//     isDone: newIsDone,
-//     DueDate: newDueDate,
-//     userid: userId,
-//   };
+// POST - /todos/create: Create todo
+WeatherRouter.post("/create", async (req, res) => {
+  const {
+    newtimestamp,
+    newlocation,
+    newtemp,
+    newhumidity,
+    newwind_speed,
+    newprecipitation,
+  } = req.body;
+  const newWeather = {
+    timestamp: newtimestamp,
+    location: newlocation,
+    temp: newtemp,
+    humidity: newhumidity,
+    wind_speed: newwind_speed,
+    precipitation: newprecipitation,
+  };
 
-//   todos.push(newTodo);
-//   const todo = await TodoModel.create(newTodo);
-//   res.status(StatusCodes.OK).json({ todo });
-// });
-
-// // GET - /todos/byuserid: All todos from a user
-// WeatherRouter.get("/byid", async (req, res) => {
-//   const todoid = req.query.todoid;
-
-//   if (!todoid) {
-//     res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
-//     return;
-//   }
-//   const todo = await TodoModel.findOne({ where: { id: todoid } });
-//   res.status(StatusCodes.OK).json({ todo: todo });
-// });
-
-// // GET - /todos/byuserid: All todos from a user
-// WeatherRouter.get("/byuserid", async (req, res) => {
-//   const userid = req.query.userid;
-
-//   if (!userid) {
-//     res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
-//     return;
-//   }
-//   const todo = await TodoModel.findOne({ where: { userid: userid } });
-//   res.status(StatusCodes.OK).json({ todo: todo });
-// });
+  weather_tb.push(newWeather);
+  const weather = await WeatherModel.create(newWeather);
+  res.status(StatusCodes.OK).json({ createdweather: weather });
+});
 
 module.exports = { WeatherRouter };
