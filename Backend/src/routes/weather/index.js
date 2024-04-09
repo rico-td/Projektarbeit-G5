@@ -8,7 +8,7 @@ const { where } = require("sequelize");
 let weather = [
   {
     id: 1,
-    timestamp: "03.10.2024",
+    timestamp: "2024-03-23",
     location: "Munich",
     temp: 12,
     humidity: 53,
@@ -18,7 +18,7 @@ let weather = [
   },
   {
     id: 2,
-    timestamp: "03.01.2025",
+    timestamp: "2024-05-11",
     location: "Mumbai",
     temp: 32,
     humidity: 53,
@@ -28,7 +28,7 @@ let weather = [
   },
   {
     id: 3,
-    timestamp: "03.10.2024",
+    timestamp: "2024-04-12",
     location: "Munich",
     temp: 12,
     humidity: 53,
@@ -38,7 +38,7 @@ let weather = [
   },
   {
     id: 4,
-    timestamp: "03.10.2024",
+    timestamp: "2024-04-20",
     location: "Munich",
     temp: 12,
     humidity: 53,
@@ -84,55 +84,37 @@ WeatherRouter.get("/id", (req, res) => {
 
 //  ***PUT REQUESTS***
 WeatherRouter.put("/update", async (req, res) => {
-  try {
-    // Extract data from request body
-    const {
-      WeatherId,
-      newtimestamp,
-      newlocation,
-      newtemp,
-      newhumidity,
-      newwind_speed,
-      newprecipitation,
-    } = req.body;
-
-    // Update weather data in the database
-    const [updatedRowsCount, updatedWeather] = await WeatherModel.update(
-      {
-        timestamp: newtimestamp,
-        location: newlocation,
-        temp: newtemp,
-        humidity: newhumidity,
-        wind_speed: newwind_speed,
-        precipitation: newprecipitation,
-      },
-      { where: { id: WeatherId }, returning: true }
-    );
-
-    // Check if any records were updated
-    if (updatedRowsCount === 0) {
-      return res
-        .status(StatusCodes.NOT_FOUND)
-        .json({ error: "Weather record not found." });
-    }
-
-    // Send back the updated weather data as a response
-    res.status(StatusCodes.OK).json({ updatedWeather });
-  } catch (error) {
-    console.error("Error updating weather:", error);
-    res
-      .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .json({ error: "Internal server error." });
-  }
+  const {
+    WeatherId,
+    newtimestamp,
+    newlocation,
+    newtemp,
+    newhumidity,
+    newwind_speed,
+    newprecipitation,
+  } = req.body;
+  const weather = await WeatherModel.update(
+    {
+      timestamp: newtimestamp,
+      location: newlocation,
+      temp: newtemp,
+      humidity: newhumidity,
+      wind_speed: newwind_speed,
+      precipitation: newprecipitation,
+    },
+    { where: { id: WeatherId } }
+  );
+  const updateWeather = await WeatherModel.findByPk(WeatherId);
+  console.log(updateWeather);
+  res.status(StatusCodes.OK).json({ updatedWeather: updateWeather });
 });
-
 // //  ***DELETE REQUESTS***
-// WeatherRouter.delete("/delete", async (req, res) => {
-//   const { todoId } = req.body;
-//   await TodoModel.destroy({ where: { id: todoId } });
+WeatherRouter.delete("/delete", async (req, res) => {
+  const { WeatherId } = req.body;
+  await WeatherModel.destroy({ where: { id: WeatherId } });
 
-//   res.status(StatusCodes.OK).json({ DeletedTodos: todoId });
-// });
+  res.status(StatusCodes.OK).json({ DeletedWeather: WeatherId });
+});
 
 // // PUT - /todos/mark: Mark todo completed
 // // PUT REQUESTS
