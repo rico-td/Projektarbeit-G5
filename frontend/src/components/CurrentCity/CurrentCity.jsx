@@ -1,5 +1,5 @@
 import React from 'react';
-import { UilLocationPoint, UilSearch } from '@iconscout/react-unicons';
+import { UilLocationPoint } from '@iconscout/react-unicons';
 import style from "./CurrentCity.module.css"
 
 function CurrentCity() {
@@ -8,11 +8,8 @@ function CurrentCity() {
     <div>
         <div className={style.currentCity}>
             <UilLocationPoint style={{ gridArea: "icon"}} size="25" color="#000000" />
-            <h2 style={{
-                    gridArea: "currentCity",
-                    textTransform: "uppercase",
-                }}
-                >current city
+            <h2 className={style.lettersCurrentCity}>
+              current city
             </h2>
         
         </div>
@@ -24,3 +21,7 @@ function CurrentCity() {
 }
 
 export default CurrentCity;
+
+
+// replace the current city with a variable state 
+// replace the date with a variable state

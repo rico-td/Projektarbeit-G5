@@ -2,6 +2,7 @@
 
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-top: 50px;
 }
 
@@ -10,4 +11,8 @@
     justify-content: center;
     line-height: 10px;
     
+}
+
+.lettersCurrentCity {
+    text-transform: uppercase;
 }

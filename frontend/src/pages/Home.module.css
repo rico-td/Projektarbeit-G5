@@ -1,5 +1,13 @@
 .Home {
-    /* text-transform: uppercase;
-    text-align: center;
-    margin-top: 100px; */
+    margin-top: 50px;
+}
+
+.bg {
+
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    width: 1920px;
+    height: 100vh;
 }

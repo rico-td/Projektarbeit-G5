@@ -1,0 +1,25 @@
+.wrapperHumidityAndWind {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.wrapperCurrentWeatherIcon {
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+.wrapperOverview {
+    display: flex;
+}
+
+.quickStats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 600px;
+    gap: 10px;
+}
+

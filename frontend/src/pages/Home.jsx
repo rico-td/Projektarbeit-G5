@@ -1,6 +1,8 @@
 // -------------- STYLE -----------------
 import CurrentCity from "../components/CurrentCity/CurrentCity";
+import QuickStats from "../components/QuckStats/QuickStats";
 import style from "./Home.module.css";
+import bg from "../img/bg.jpg"
 // -------------- LOGIC -----------------
 
 // -------------- ELEMENTS -----------------
@@ -8,17 +10,10 @@ import style from "./Home.module.css";
 function Home() {
   return (
     <div className={style.Home}>
-      <h2
-        style={{
-          textTransform: "uppercase",
-          textAlign: "center",
-          marginTop: "100px",
-        }}
-      >
-        Home Page
-        </h2>
-
-        <CurrentCity />
+      <img src={bg} className={style.bg} />
+     
+      <CurrentCity />
+      <QuickStats/>
     </div>
   );
 }
