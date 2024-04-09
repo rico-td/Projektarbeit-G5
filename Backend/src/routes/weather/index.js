@@ -71,7 +71,7 @@ addWeatherData();
 WeatherRouter.get("/all", async (req, res) => {
   try {
     // Call the asynchronous function to fetch data from the database
-    const Weather = await WeatherModel.findAll();
+    const Weather_tb = await WeatherModel.findAll();
     // Send the fetched data as a JSON response
     res.json(Weather_tb);
   } catch (error) {
