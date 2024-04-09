@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const { AppRouter } = require("./src/routes");
-const weatherSequelize = require("./src/database/setup/database");
+const WeatherSequelize = require("./src/database/setup/database");
 
 // Zugriff auf Umgebungsvariablen
 const { PORT } = process.env;
@@ -13,8 +13,7 @@ app.use(bodyParser.json());
 // Use for development
 app.use(cors());
 
-weatherSequelize
-  .sync()
+WeatherSequelize.sync()
   .then(() => {
     console.log("DB has been success");
   })

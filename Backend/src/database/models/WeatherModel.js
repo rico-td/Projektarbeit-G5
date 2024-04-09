@@ -1,8 +1,8 @@
 const { DataTypes } = require("sequelize");
-const weatherSequelize = require("../setup/database");
+const WeatherSequelize = require("../setup/database");
 
 // Define the Todo model
-const WeatherModel = weatherSequelize.define(
+const WeatherModel = WeatherSequelize.define(
   "weather",
   {
     id: {
@@ -40,7 +40,7 @@ const WeatherModel = weatherSequelize.define(
       allowNull: false,
     },
   },
-  { tableName: "Weather_tb" }
+  { tableName: "weather_tb" }
 );
 
 module.exports = WeatherModel;

@@ -5,7 +5,7 @@ const WeatherModel = require("../../database/models/WeatherModel");
 const { where } = require("sequelize");
 
 // Simulated database for weather
-let weather_tb = [
+let Weather_tb = [
   {
     id: 1,
     timestamp: "2024-03-23",
@@ -48,9 +48,19 @@ let weather_tb = [
   },
 ];
 
-console.log(weather_tb);
+console.log(Weather_tb);
 const WeatherRouter = Router();
 
+// add the data into sql workbench
+async function addWeatherData() {
+  try {
+    await WeatherModel.bulkCreate(Weather_tb);
+  } catch (error) {
+    console.log("error occured during add data");
+  }
+}
+
+addWeatherData();
 // // GET - /weather/all: Return all Weather
 // WeatherRouter.get("/all", async (req, res) => {
 //   const Weather = await WeatherModel.findAll();
@@ -61,9 +71,9 @@ const WeatherRouter = Router();
 WeatherRouter.get("/all", async (req, res) => {
   try {
     // Call the asynchronous function to fetch data from the database
-    const weather = await WeatherModel.findAll();
+    const Weather = await WeatherModel.findAll();
     // Send the fetched data as a JSON response
-    res.json(weather_tb);
+    res.json(Weather_tb);
   } catch (error) {
     // Handle errors
     console.error("Error fetching data:", error);
@@ -78,7 +88,7 @@ WeatherRouter.get("/id", (req, res) => {
     res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
     return;
   }
-  const User_weather = weather_tb.find((item) => item.id === WeatherId);
+  const User_weather = Weather_tb.find((item) => item.id === WeatherId);
   res.status(StatusCodes.OK).json({ weather: User_weather });
 });
 
@@ -93,7 +103,7 @@ WeatherRouter.put("/update", async (req, res) => {
     newwind_speed,
     newprecipitation,
   } = req.body;
-  const weather = await WeatherModel.update(
+  const Weather = await WeatherModel.update(
     {
       timestamp: newtimestamp,
       location: newlocation,
@@ -108,6 +118,7 @@ WeatherRouter.put("/update", async (req, res) => {
   console.log(updateWeather);
   res.status(StatusCodes.OK).json({ updatedWeather: updateWeather });
 });
+
 // //  ***DELETE REQUESTS***
 WeatherRouter.delete("/delete", async (req, res) => {
   const { WeatherId } = req.body;
@@ -116,39 +127,7 @@ WeatherRouter.delete("/delete", async (req, res) => {
   res.status(StatusCodes.OK).json({ DeletedWeather: WeatherId });
 });
 
-// // PUT - /todos/mark: Mark todo completed
-// // PUT REQUESTS
-// WeatherRouter.put("/mark", async (req, res) => {
-//   const { todoId, newIsDone } = req.body;
-
-//   await TodoModel.findByPk(todoId)
-//     .then((todo) => {
-//       // Check if the todo exists
-//       if (!todo) {
-//         return res
-//           .status(StatusCodes.NOT_FOUND)
-//           .json({ error: "Todo not found" });
-//       }
-
-//       // Update the isDone property
-//       todo.isDone = newIsDone;
-
-//       // Save the changes
-//       return todo.save();
-//     })
-//     .then((updatedTodo) => {
-//       // Return the updated todo in the response
-//       res.status(StatusCodes.OK).json({ updatedTodo });
-//     })
-//     .catch((error) => {
-//       console.error("Error marking todo as done:", error);
-//       res
-//         .status(StatusCodes.INTERNAL_SERVER_ERROR)
-//         .json({ error: "Internal Server Error" });
-//     });
-// });
-
-// POST - /todos/create: Create todo
+// POST - /weather/create: Create weather
 WeatherRouter.post("/create", async (req, res) => {
   const {
     newtimestamp,
@@ -167,9 +146,10 @@ WeatherRouter.post("/create", async (req, res) => {
     precipitation: newprecipitation,
   };
 
-  weather_tb.push(newWeather);
-  const weather = await WeatherModel.create(newWeather);
-  res.status(StatusCodes.OK).json({ createdweather: weather });
+  Weather_tb.push(newWeather);
+  const Weather = await WeatherModel.create(newWeather);
+  console.log(Weather);
+  res.status(StatusCodes.OK).json({ Weather });
 });
 
 module.exports = { WeatherRouter };
