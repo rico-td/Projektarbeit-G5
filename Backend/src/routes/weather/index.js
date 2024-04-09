@@ -100,6 +100,7 @@ WeatherRouter.put("/update", async (req, res) => {
     newlocation,
     newtemp,
     newhumidity,
+    newdescription,
     newwind_speed,
     newprecipitation,
   } = req.body;
@@ -109,6 +110,7 @@ WeatherRouter.put("/update", async (req, res) => {
       location: newlocation,
       temp: newtemp,
       humidity: newhumidity,
+      description: newdescription,
       wind_speed: newwind_speed,
       precipitation: newprecipitation,
     },
@@ -134,6 +136,7 @@ WeatherRouter.post("/create", async (req, res) => {
     newlocation,
     newtemp,
     newhumidity,
+    newdescription,
     newwind_speed,
     newprecipitation,
   } = req.body;
@@ -142,14 +145,15 @@ WeatherRouter.post("/create", async (req, res) => {
     location: newlocation,
     temp: newtemp,
     humidity: newhumidity,
+    description: newdescription,
     wind_speed: newwind_speed,
     precipitation: newprecipitation,
   };
 
   Weather_tb.push(newWeather);
-  const Weather = await WeatherModel.create(newWeather);
-  console.log(Weather);
-  res.status(StatusCodes.OK).json({ Weather });
+  const weather = await WeatherModel.create(newWeather);
+  console.log(weather);
+  res.status(StatusCodes.OK).json({ createdWeather: weather });
 });
 
 module.exports = { WeatherRouter };
