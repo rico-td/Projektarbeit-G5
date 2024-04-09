@@ -18,13 +18,13 @@ let weather = [
   },
   {
     id: 2,
-    timestamp: "03.10.2024",
-    location: "Munich",
-    temp: 12,
+    timestamp: "03.01.2025",
+    location: "Mumbai",
+    temp: 32,
     humidity: 53,
-    description: "Rain",
-    wind_speed: 12,
-    precipitation: 10,
+    description: "Sun",
+    wind_speed: 10,
+    precipitation: 18,
   },
   {
     id: 3,
@@ -51,38 +51,80 @@ let weather = [
 console.log(weather);
 const WeatherRouter = Router();
 
-// GET - /weather/all: Return all Weather
+// // GET - /weather/all: Return all Weather
+// WeatherRouter.get("/all", async (req, res) => {
+//   const Weather = await WeatherModel.findAll();
+//   res.status(StatusCodes.OK).send(Weather);
+// });
+
+// Define a GET route handler to get all data
 WeatherRouter.get("/all", async (req, res) => {
-  const Weather = await WeatherModel.findAll();
-  res.status(StatusCodes.OK).send(Weather);
+  try {
+    // Call the asynchronous function to fetch data from the database
+    const Weather = await WeatherModel.findAll();
+    // Send the fetched data as a JSON response
+    res.json(weather);
+  } catch (error) {
+    // Handle errors
+    console.error("Error fetching data:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 //  ***GET REQUESTS***
 // // Return todos from a specific user
-// WeatherRouter.get("/id", (req, res) => {
-//   const WeatherId = parseInt(req.query.WeatherId);
-//   if (!WeatherId) {
-//     res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
-//     return;
-//   }
-//   const User_weather = weather.find((item) => item.id === WeatherId);
-//   res.status(StatusCodes.OK).json({ weather: User_weather });
-// });
+WeatherRouter.get("/id", (req, res) => {
+  const WeatherId = parseInt(req.query.WeatherId);
+  if (!WeatherId) {
+    res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
+    return;
+  }
+  const User_weather = weather.find((item) => item.id === WeatherId);
+  res.status(StatusCodes.OK).json({ weather: User_weather });
+});
 
-// //  ***PUT REQUESTS***
-// WeatherRouter.put("/update", async (req, res) => {
-//   const { newTask, todoId, newDueDate, newIsDone, userId } = req.body;
-//   const todos = await TodoModel.update(
-//     {
-//       task: newTask,
-//       isDone: newIsDone,
-//       DueDate: newDueDate,
-//       userid: userId,
-//     },
-//     { where: { id: todoId } }
-//   );
-//   const todo = await TodoModel.findByPk(todoId);
-//   res.status(StatusCodes.OK).json({ updatedTodos: todo });
-// });
+//  ***PUT REQUESTS***
+WeatherRouter.put("/update", async (req, res) => {
+  try {
+    // Extract data from request body
+    const {
+      WeatherId,
+      newtimestamp,
+      newlocation,
+      newtemp,
+      newhumidity,
+      newwind_speed,
+      newprecipitation,
+    } = req.body;
+
+    // Update weather data in the database
+    const [updatedRowsCount, updatedWeather] = await WeatherModel.update(
+      {
+        timestamp: newtimestamp,
+        location: newlocation,
+        temp: newtemp,
+        humidity: newhumidity,
+        wind_speed: newwind_speed,
+        precipitation: newprecipitation,
+      },
+      { where: { id: WeatherId }, returning: true }
+    );
+
+    // Check if any records were updated
+    if (updatedRowsCount === 0) {
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ error: "Weather record not found." });
+    }
+
+    // Send back the updated weather data as a response
+    res.status(StatusCodes.OK).json({ updatedWeather });
+  } catch (error) {
+    console.error("Error updating weather:", error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ error: "Internal server error." });
+  }
+});
 
 // //  ***DELETE REQUESTS***
 // WeatherRouter.delete("/delete", async (req, res) => {
