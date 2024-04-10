@@ -11,21 +11,25 @@ function QuickStats() {
 
     <div className={style.quickStats}>
     
-      <h1 style={{fontSize: "120px", fontWeight: "100"}} >
-        28°C
-      </h1>
+      <h2 className={style.currentTemp}>
+        28°
+      </h2>
 
-      <div className="wrapper">
+      <div>
         <div className={style.wrapperCurrentWeatherIcon}>
-          <UilSun style={{ gridArea: "icon"}} size="45" color="#000000" />
+          <UilSun style={{ gridArea: "icon"}} size="40" color="#000000" />
           <h3>sunny</h3>
         </div>
     
         <div className={style.wrapperHumidityAndWind}>
-          <UilSun style={{ gridArea: "icon"}} size="20" color="#000000" />
-          <h4>62%</h4>
-          <UilSun style={{ gridArea: "icon"}} size="20" color="#000000" />
-          <h4>High%</h4>
+          <div className={style.wrapperHumidity}>
+            <UilSun style={{ gridArea: "icon"}} size="20" color="#000000" />
+            <h4>62%</h4>
+          </div>
+          <div className={style.wrapperWind}>
+            <UilSun style={{ gridArea: "icon"}} size="20" color="#000000" />
+            <h4>high</h4>
+          </div>
         </div>
 
       </div>

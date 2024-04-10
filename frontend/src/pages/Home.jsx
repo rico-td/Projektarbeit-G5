@@ -13,7 +13,9 @@ function Home() {
       <img src={bg} className={style.bg} />
      
       <CurrentCity />
-      <QuickStats/>
+      <div className={style.wrapperQuickStats}>
+        <QuickStats />
+      </div>
     </div>
   );
 }

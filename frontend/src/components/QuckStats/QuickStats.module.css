@@ -1,25 +1,43 @@
 .wrapperHumidityAndWind {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
+    margin-top: 3px;
 }
 
 .wrapperCurrentWeatherIcon {
-  
     display: flex;
     flex-direction: column;
     align-items: center; 
 }
 
-.wrapperOverview {
-    display: flex;
-}
-
 .quickStats {
+    /* border: green solid; */
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 600px;
-    gap: 10px;
+    gap: 20px;
+}
+
+.wrapperHumidity {
+    display: flex;
+}
+
+.wrapperWind {
+    display: flex;
+}
+
+.currentTemp {
+    font-size: 100px;
+    font-weight: 500;
+    border: solid red;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+h4 {
+    font-size: 15px;
 }
 
