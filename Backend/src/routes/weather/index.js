@@ -54,9 +54,18 @@ const WeatherRouter = Router();
 // add the data into sql workbench
 async function addWeatherData() {
   try {
-    await WeatherModel.bulkCreate(Weather_tb);
+    //await WeatherModel.bulkCreate(Weather_tb);
+    for (let weatherData of Weather_tb) {
+      // Check if weather data corresponding to particular id already exists
+      const existingWeather = await WeatherModel.findOne({ where: { id: weatherData.id } });
+      
+      // If weather data doesn't exist, create 
+      if (!existingWeather) {
+        await WeatherModel.create(Weather_tb);
+      }
+    }
   } catch (error) {
-    console.log("error occured during add data");
+    console.log("error occured during weather add data");
   }
 }
 

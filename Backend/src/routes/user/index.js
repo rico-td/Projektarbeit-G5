@@ -40,7 +40,15 @@ const UserRouter = Router();
 // add the data into sql workbench
 async function addUserData() {
   try {
-    await UserModel.bulkCreate(user);
+    for (let userData of user) {
+      // Check if user already exists
+      const existingUser = await UserModel.findOne({ where: { id: userData.id } });
+      
+      // If user doesn't exist, create new user
+      if (!existingUser) {
+        await UserModel.create(userData);
+      }
+    }
   } catch (error) {
     console.log("error occured during add data", error);
   }
@@ -101,8 +109,22 @@ UserRouter.post("/validateuser", async (req, res) => {
 
 UserRouter.post("/createuser", async (req, res) => {
   const { username, password, email } = req.body;
+
   if (!username || !password || !email) {
     res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
+    return;
+  }
+
+  // Check if the email is in correct format
+  const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+  if (!emailRegex.test(email)) {
+    res.status(StatusCodes.BAD_REQUEST).send("Invalid email format");
+    return;
+  }
+
+  // Check if the username starts with a number
+  if (!isNaN(username[0])) {
+    res.status(StatusCodes.BAD_REQUEST).send("Username should not start with a number");
     return;
   }
 
@@ -129,6 +151,7 @@ UserRouter.post("/createuser", async (req, res) => {
     console.log("Error occured creating user", e);
   }
 });
+
 
 // //  ***DELETE USER***
 UserRouter.delete("/delete", async (req, res) => {
