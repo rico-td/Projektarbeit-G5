@@ -51,7 +51,6 @@ addUserData();
 // Define a GET route handler to get all data
 UserRouter.get("/all", async (req, res) => {
   try {
-
     // Call the asynchronous function to fetch data from the database
     const User = await UserModel.findAll();
     // Send the fetched data as a JSON response
@@ -96,6 +95,36 @@ try{
 }
 });
   
+//    CREATE USER
+
+UserRouter.post("/createuser",async (req, res ) => {
+  const { username, password, email } = req.body;
+  if( !username || !password || !email ){
+    res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
+    return;
+  }
+
+  try{
+    //check if email and username already exists
+    const exitingEmail = await UserModel.findOne( { where: { email } } );
+    const exitingUsername = await UserModel.findOne( { where: { username } } );
+    if(exitingEmail){
+      res.status(StatusCodes.CONFLICT).send('Email already exists');
+      return;
+    }
+    else if(exitingUsername){
+      res.status(StatusCodes.CONFLICT).send('Username already exists');
+      return;
+    }
+
+    const hashedPassword = bcrypt.hashSync(password, saltRounds);
+    const newUser = await UserModel.create( { username, password:hashedPassword, email } );
+    res.status(StatusCodes.CREATED).json( { user: newUser } );
+  }catch(e){
+    console.log("Error occured creating user", e);
+  }
+})
+
 // //  ***DELETE USER***
 UserRouter.delete("/delete", async (req, res) => {
   const { UserId } = req.body;
