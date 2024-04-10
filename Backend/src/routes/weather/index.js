@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { StatusCodes, ReasonPhrases } = require("http-status-codes");
-const weatherSequelize = require("../../database/setup/database");
+const WeatherSequelize = require("../../database/setup/database");
 const WeatherModel = require("../../database/models/WeatherModel");
 const { where } = require("sequelize");
 
@@ -54,9 +54,7 @@ const WeatherRouter = Router();
 // add the data into sql workbench
 async function addWeatherData() {
   try {
-
     await WeatherModel.bulkCreate(Weather_tb);
-
   } catch (error) {
     console.log("error occured during add data");
   }
@@ -71,19 +69,19 @@ addWeatherData();
 // });
 
 // Define a GET route handler to get all data
-WeatherRouter.get("/all", async (req, res) => {
-  try {
+// WeatherRouter.get("/all", async (req, res) => {
+//   try {
 
-    // Call the asynchronous function to fetch data from the database
-    const Weather_tb = await WeatherModel.findAll();
-    // Send the fetched data as a JSON response
-    res.json(Weather_tb);
-  } catch (error) {
-    // Handle errors
-    console.error("Error fetching data:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
+//     // Call the asynchronous function to fetch data from the database
+//     const Weather_tb = await WeatherModel.findAll();
+//     // Send the fetched data as a JSON response
+//     res.json(Weather_tb);
+//   } catch (error) {
+//     // Handle errors
+//     console.error("Error fetching data:", error);
+//     res.status(500).json({ error: "Internal server error" });
+//   }
+// });
 //  ***GET REQUESTS***
 // // Return todos from a specific user
 WeatherRouter.get("/id", (req, res) => {
