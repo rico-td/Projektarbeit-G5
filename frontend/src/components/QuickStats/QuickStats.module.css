@@ -1,11 +1,11 @@
-.wrapperHumidityAndWind {
+.containerHumidityAndWind {
     display: flex;
     align-items: center;
     gap: 10px;
     margin-top: 3px;
 }
 
-.wrapperCurrentWeatherIcon {
+.containerIcon {
     display: flex;
     flex-direction: column;
     align-items: center; 
@@ -19,18 +19,17 @@
     gap: 20px;
 }
 
-.wrapperHumidity {
+.containerHumidity {
+   display: flex;
+}
+
+.containerWind {
     display: flex;
 }
 
-.wrapperWind {
-    display: flex;
-}
-
-.currentTemp {
+.containerCurrentTemp {
     font-size: 100px;
     font-weight: 500;
-    border: solid red;
 }
 
 h3 {

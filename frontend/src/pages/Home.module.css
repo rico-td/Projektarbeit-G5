@@ -3,7 +3,6 @@
 }
 
 .bg {
-
     position: absolute;
     left: 0;
     top: 0;
@@ -12,6 +11,6 @@
     height: 100vh;
 }
 
-.wrapperQuickStats {
+.containerQuickStats {
     margin-top: 100px;
 }

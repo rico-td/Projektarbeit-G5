@@ -6,6 +6,7 @@ function App() {
     <HashRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        {/* <Route path="/login" element={<Login />} /> */}
       </Routes>
     </HashRouter>
   );
