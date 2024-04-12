@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const WeatherSequelize = require("../setup/database");
 
-// Define the Todo model
+// Define the Weather model
 const WeatherModel = WeatherSequelize.define(
   "weather",
   {
