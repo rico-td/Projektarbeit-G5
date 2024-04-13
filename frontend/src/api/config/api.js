@@ -1,7 +1,9 @@
 import axios from "axios";
 
-const api = axios.create({
-  baseURL: "http://localhost:3000/v1",
+const WeatherApi = axios.create({
+  baseURL: "api.openweathermap.org/data/2.5/forecast?q={cityName}&appid=cceeb21005081f70dafeafa10dfdff59",
 });
 
-export default api;
+export default WeatherApi;
+
+// apiKey = 'cceeb21005081f70dafeafa10dfdff59'
