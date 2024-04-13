@@ -1,12 +1,10 @@
 import React from "react";
-import { UilLocationPoint } from "@iconscout/react-unicons";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
 const date = new Date();
 const weekday = date.toLocaleString("default", { weekday: "long" }).slice(0, 3);
 const day = date.getDate();
 const month = date.toLocaleString("default", { month: "long" });
-const year = date.getFullYear();
 
 function CurrentCity() {
   return (
