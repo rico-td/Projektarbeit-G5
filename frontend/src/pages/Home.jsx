@@ -4,7 +4,10 @@ import QuickStats from "../components/QuickStats/QuickStats";
 import style from "./Home.module.css";
 import bg from "../assets/img/bg.jpg";
 import InputFull from "../components/InputFull/InputFull.js";
-import RainyCloud from "../components/RainyCloud/RainyCloud.js";
+import Forecast7Days from "../components/Forecast7Days/Forecast7Days.js";
+import Forecast7DaysComponent from "../components/Forecast7Days/Forecast7DaysComponent.js";
+
+import FlippingCard from "../components/FlippingCard/FlippingCard.js";
 // -------------- LOGIC -----------------
 
 // -------------- ELEMENTS -----------------
@@ -17,9 +20,9 @@ function Home() {
       <div className="mt-7">
         <CurrentCity />
       </div>
-      {/* <RainyCloud /> */}
       <div className="mt-20">
-        <QuickStats />
+        <Forecast7DaysComponent />
+        {/* <Forecast7Days /> */}
       </div>
     </div>
   );

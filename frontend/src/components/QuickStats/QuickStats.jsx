@@ -11,7 +11,7 @@ const dailyAttribute = "sunny";
 
 function QuickStats() {
   return (
-    <div className="flex justify-center items-center gap-4 cursor-default">
+    <div className="flex flex-col justify-center items-center gap-4 cursor-default">
       <h2 className="flex justify-center items-center text-white text-7xl">
         {temp}
       </h2>
