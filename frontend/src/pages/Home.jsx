@@ -14,7 +14,7 @@ import FlippingCard from "../components/FlippingCard/FlippingCard.js";
 
 function Home() {
   return (
-    <div className="mt-10 flex flex-col justify-center items-center">
+    <div className="hello mt-10 flex flex-col justify-center items-center">
       <img src={bg} className={style.bg} alt="background" />
       <InputFull />
       <div className="mt-7">

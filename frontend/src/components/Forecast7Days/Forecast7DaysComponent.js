@@ -13,7 +13,7 @@ import img07 from "../../assets/Forecast7Days/o7.jpg";
 
 function Forecast7DaysComponent() {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-4">
       <FlippingCard />
       <FlippingCard />
       <FlippingCard />

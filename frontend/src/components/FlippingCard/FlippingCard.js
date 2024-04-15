@@ -30,6 +30,8 @@ const FlippingCard = () => {
       require("../../assets/Forecast7Days/o7.jpg"),
     ];
     const randomIndex = Math.floor(Math.random() * images.length);
+
+    console.log(Math.floor(Math.random() * images.length));
     return images[randomIndex];
   }
 
@@ -59,7 +61,7 @@ const FlippingCard = () => {
           }}
           onAnimationComplete={() => setIsAnimating(false)}
         >
-          <div className="flip-card-front w-[100%] h-[100%] flex justify-center items-center">
+          <div className="flip-card-front w-[100%] h-[100%] flex justify-center items-center hover:-translate-y-10 hover:border-1px transform transition-transform duration-500 ease-in-out">
             <img
               className="rounded-3xl"
               src={isFlipped ? randomImage : randomImage}
