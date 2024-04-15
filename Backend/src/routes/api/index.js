@@ -55,27 +55,6 @@ ApiRouter.get("/currentday", async(req, res) => {
             humidity: item.main.humidity
         }))
 
-      
-        console.log("Location:", city );
-        console.log("Sunrise:", sunriseConvert);
-        console.log("Sunset:", sunsetConvert);
-
-        forecastsForDay.forEach((forecast, index ) => {
-            console.log("TODAY'S FORECAST", index + 1);
-            console.log("Today's date:", forecast.date);
-            console.log("Today's time:", forecast.time);
-            console.log("Today's temperature in celsius:", forecast.temperature_celsius + "°C");
-            console.log("Today's minimum temperature in celsius:", forecast.min_temperature_celsius + "°C");
-            console.log("Today's maximum temperature in celsius:", forecast.max_temperature_celsius + "°C");
-            console.log("Today's main_description:", forecast.main_description);
-            console.log("Today's temperature in fahrenheit:", forecast.temperature_fahrenheit + "°F");
-            console.log("Today's minimum temperature in fahrenheit:", forecast.min_temperature_fahrenheit + "°F");
-            console.log("Today's maximum temperature in fahrenheit:", forecast.max_temperature_fahrenheit + "°F");
-            console.log("Today's description:", forecast.description);
-            console.log("Today's wind Speed:", forecast.windSpeed);
-            console.log("Today's humidity:", forecast.humidity);
-        })
-
         const responseData = {
             city,
             coord,
@@ -105,7 +84,7 @@ ApiRouter.get("/currentday", async(req, res) => {
     }
   });
 
-//interpret the weather condition from the WHO weather code
+//interpret the weather condition from the WMWMOO weather code
 function interpretWeatherCode(weatherCode) {
     switch (weatherCode) {
         case 0:
@@ -170,7 +149,7 @@ function interpretWeatherCode(weatherCode) {
 }
 
   //  "/upcomingdays" takes the lat and lon from "/currentday" 
-  //  using the retrieved info., "/upcomingdays" retrieves the weather for the next 7 days 
+  //  using the retrieved lat and lon, "/upcomingdays" retrieves the weather for the next 7 days 
 ApiRouter.get("/upcomingdays", async(req, res) => {
 
 const { latitude, longitude } = req.query;
@@ -197,15 +176,6 @@ try {
             
             const weatherCode = weatherCodes[index];
             const weatherCondition = interpretWeatherCode(weatherCode);
-
-            console.log("UPCOMING FORECAST", index + 1);
-            console.log("Date:", date);
-            console.log("Weather Code:", weatherCode);
-            console.log("Weather Condition:", weatherCondition);
-            console.log("Minimum Temperature in Celsius:", minTemperatureCelsius + "°C");
-            console.log("Maximum Temperature in Celsius:", maxTemperatureCelsius + "°C");
-            console.log("Minimum Temperature in Fahrenheit:", minTemperatureFahrenheit.toFixed(2) + "°F");
-            console.log("Maximum Temperature in Fahrenheit:", maxTemperatureFahrenheit.toFixed(2) + "°F");
 
             return {
                 date,
