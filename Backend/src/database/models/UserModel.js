@@ -24,10 +24,6 @@ const UserModel = userSequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    favorites: {
-      type: DataTypes.JSON, // Assuming favorites will be stored as JSON
-      defaultValue: [], // Default value is an empty array
-    },
   },
   { tableName: "User_tb" }
 );
