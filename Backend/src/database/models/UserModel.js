@@ -12,8 +12,9 @@ const UserModel = userSequelize.define(
       allowNull: false,
     },
     email: {
-        type: DataTypes.STRING,
-        allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
     },
     username: {
       type: DataTypes.STRING,
@@ -23,7 +24,10 @@ const UserModel = userSequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    
+    favorites: {
+      type: DataTypes.JSON, // Assuming favorites will be stored as JSON
+      defaultValue: [], // Default value is an empty array
+    },
   },
   { tableName: "User_tb" }
 );

@@ -42,8 +42,10 @@ async function addUserData() {
   try {
     for (let userData of user) {
       // Check if user already exists
-      const existingUser = await UserModel.findOne({ where: { id: userData.id } });
-      
+      const existingUser = await UserModel.findOne({
+        where: { id: userData.id },
+      });
+
       // If user doesn't exist, create new user
       if (!existingUser) {
         await UserModel.create(userData);
@@ -124,7 +126,9 @@ UserRouter.post("/createuser", async (req, res) => {
 
   // Check if the username starts with a number
   if (!isNaN(username[0])) {
-    res.status(StatusCodes.BAD_REQUEST).send("Username should not start with a number");
+    res
+      .status(StatusCodes.BAD_REQUEST)
+      .send("Username should not start with a number");
     return;
   }
 
@@ -152,13 +156,69 @@ UserRouter.post("/createuser", async (req, res) => {
   }
 });
 
-
 // //  ***DELETE USER***
 UserRouter.delete("/delete", async (req, res) => {
   const { UserId } = req.body;
   await UserModel.destroy({ where: { id: UserId } });
 
   res.status(StatusCodes.OK).json({ DeletedUser: UserId });
+});
+
+// Route to add a favorite for a user
+UserRouter.post("/favorites/add", async (req, res) => {
+  const { userId, favoriteItem } = req.body;
+  try {
+    const user = await UserModel.findByPk(userId);
+    if (!user) {
+      return res.status(StatusCodes.NOT_FOUND).send("User not found");
+    }
+    user.favorites.push(favoriteItem);
+    await user.save();
+    res.status(StatusCodes.OK).json({ message: "Favorite added successfully" });
+  } catch (error) {
+    console.error("Error adding favorite:", error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ error: "Internal server error" });
+  }
+});
+
+// Route to remove a favorite for a user
+UserRouter.delete("/favorites/remove", async (req, res) => {
+  const { userId, favoriteItem } = req.body;
+  try {
+    const user = await UserModel.findByPk(userId);
+    if (!user) {
+      return res.status(StatusCodes.NOT_FOUND).send("User not found");
+    }
+    user.favorites = user.favorites.filter((item) => item !== favoriteItem);
+    await user.save();
+    res
+      .status(StatusCodes.OK)
+      .json({ message: "Favorite removed successfully" });
+  } catch (error) {
+    console.error("Error removing favorite:", error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ error: "Internal server error" });
+  }
+});
+
+// Route to get all favorites for a user
+UserRouter.get("/favorites", async (req, res) => {
+  const userId = req.query.userId;
+  try {
+    const user = await UserModel.findByPk(userId);
+    if (!user) {
+      return res.status(StatusCodes.NOT_FOUND).send("User not found");
+    }
+    res.status(StatusCodes.OK).json({ favorites: user.favorites });
+  } catch (error) {
+    console.error("Error fetching favorites:", error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ error: "Internal server error" });
+  }
 });
 
 module.exports = { UserRouter };

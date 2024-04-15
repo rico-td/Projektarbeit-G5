@@ -22,7 +22,7 @@ ApiRouter.get("/currentday", async (req, res) => {
   const cnt = 5;
 
   //api URL
-  const apiQuery = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}&cnt=${cnt}&units=metric`;
+  const apiQuery = `http://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${API_KEY}&cnt=${cnt}&units=metric`;
 
   try {
     const response = await axios.get(apiQuery);
