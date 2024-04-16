@@ -1,0 +1,191 @@
+{
+	"info": {
+		"_postman_id": "488ff2d7-1dd1-40e5-8c7a-51afab32ef72",
+		"name": "Weather",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31478693"
+	},
+	"item": [
+		{
+			"name": "http://localhost:7070/v1/user/id?UserId=2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7070/v1/user/id?UserId=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"v1",
+						"user",
+						"id"
+					],
+					"query": [
+						{
+							"key": "UserId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"John\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7070/v1/user/validateuser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"v1",
+						"user",
+						"validateuser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteUser",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"UserId\":4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7070/v1/user/delete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"v1",
+						"user",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SignUp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Lena\",\r\n    \"password\": \"123456\",\r\n    \"email\":\"lena@mail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7070/v1/user/createuser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"v1",
+						"user",
+						"createuser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CurrentDay Weather",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7070/v1/api/getweather/currentday?cityName=Paris",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"v1",
+						"api",
+						"getweather",
+						"currentday"
+					],
+					"query": [
+						{
+							"key": "cityName",
+							"value": "Paris"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpcomingDays Weather",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7070/v1/api/getweather/upcomingdays?latitude=48.8534&longitude=2.3488&daily=temperature_2m_max,temperature_2m_min\n",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"v1",
+						"api",
+						"getweather",
+						"upcomingdays"
+					],
+					"query": [
+						{
+							"key": "latitude",
+							"value": "48.8534"
+						},
+						{
+							"key": "longitude",
+							"value": "2.3488"
+						},
+						{
+							"key": "daily",
+							"value": "temperature_2m_max,temperature_2m_min\n"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
