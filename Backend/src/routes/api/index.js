@@ -32,7 +32,8 @@ ApiRouter.get("/currentday", async(req, res) => {
         const response = await axios.get(apiQuery);
 
         //extracting the relevant information from response
-        const { city, coord, sunrise, sunset } = response.data;
+        const coordinatesResponse  = response.data.city.coord;
+        const cityNameResponse = response.data.city.name;
         const sunriseResponse = response.data.city.sunrise;
         const sunsetResponse = response.data.city.sunset;
 
@@ -51,13 +52,13 @@ ApiRouter.get("/currentday", async(req, res) => {
             max_temperature_fahrenheit:celsiusToFahrenheit(item.main.temp_max),
             main_description: item.weather[0].main,
             description: item.weather[0].description,
-            windSpeed: item.wind.speed,
+            wind_speed: item.wind.speed,
             humidity: item.main.humidity
         }))
 
         const responseData = {
-            city,
-            coord,
+            cityNameResponse,
+            coordinatesResponse,
             sunrise: sunriseConvert,
             sunset: sunsetConvert,
             forecasts: forecastsForDay.map(forecast => ({
@@ -71,7 +72,7 @@ ApiRouter.get("/currentday", async(req, res) => {
                 max_temperature_fahrenheit: Math.round(forecast.max_temperature_fahrenheit),
                 main_description: forecast.main_description,
                 description: forecast.description,
-                windSpeed: forecast.windSpeed,
+                wind_speed: forecast.wind_speed,
                 humidity: forecast.humidity
             }))
         };
@@ -154,7 +155,7 @@ ApiRouter.get("/upcomingdays", async(req, res) => {
 
 const { latitude, longitude } = req.query;
 
-const apiQuery = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min`;
+const apiQuery = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,wind_speed_10m_max`;
 
 try {
     const response = await axios.get(apiQuery);
@@ -164,16 +165,17 @@ try {
     const weatherCodes = dailyData.weather_code; 
     const maxTemperaturesCelsius = dailyData.temperature_2m_max;
     const minTemperaturesCelsius = dailyData.temperature_2m_min;
+    const windSpeeds = dailyData.wind_speed_10m_max;
+    const sunrises = dailyData.sunrise;
+    const sunsets = dailyData.sunset;
 
     const responseData = {
-        dates: dates.map((date, index) => {
+        forecasts: dates.map((date, index) => {
             const maxTemperatureCelsius = maxTemperaturesCelsius[index];
             const minTemperatureCelsius = minTemperaturesCelsius[index];
-
-            // Convert Celsius to Fahrenheit
-            const maxTemperatureFahrenheit = celsiusToFahrenheit(maxTemperatureCelsius);
-            const minTemperatureFahrenheit = celsiusToFahrenheit(minTemperatureCelsius);
-            
+            const windSpeed = windSpeeds[index];
+            const sunrise = sunrises[index].substring(11, 16);;
+            const sunset = sunsets[index].substring(11, 16);;
             const weatherCode = weatherCodes[index];
             const weatherCondition = interpretWeatherCode(weatherCode);
 
@@ -185,12 +187,15 @@ try {
                 temperature_fahrenheit: Math.round(celsiusToFahrenheit(maxTemperatureCelsius)),
                 min_temperature_fahrenheit: Math.round(celsiusToFahrenheit(minTemperatureCelsius)),
                 max_temperature_fahrenheit: Math.round(celsiusToFahrenheit(maxTemperatureCelsius)),
-                weather_condition: weatherCondition
+                wind_speed: windSpeed,
+                sunrise,
+                sunset,
+                description: weatherCondition
             };
         })
     };
 
-    res.status(StatusCodes.OK).json(responseData);
+    res.status(StatusCodes.OK).json({ responseData });
 } catch (e) {
     console.log("error occurred during fetching upcoming days weather", e);
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).send("Error fetching upcoming days data");
