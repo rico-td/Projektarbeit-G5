@@ -32,7 +32,8 @@ ApiRouter.get("/currentday", async(req, res) => {
         const response = await axios.get(apiQuery);
 
         //extracting the relevant information from response
-        const coordinatesResponse  = response.data.city.coord;
+        const latitudeCoordinateResponse  = response.data.city.coord.lat;
+        const longitudeCoordinateResponse  = response.data.city.coord.lon;
         const cityNameResponse = response.data.city.name;
         const sunriseResponse = response.data.city.sunrise;
         const sunsetResponse = response.data.city.sunset;
@@ -58,7 +59,8 @@ ApiRouter.get("/currentday", async(req, res) => {
 
         const responseData = {
             cityNameResponse,
-            coordinatesResponse,
+            latitudeCoordinateResponse,
+            longitudeCoordinateResponse,
             sunrise: sunriseConvert,
             sunset: sunsetConvert,
             forecasts: forecastsForDay.map(forecast => ({
@@ -85,7 +87,7 @@ ApiRouter.get("/currentday", async(req, res) => {
     }
   });
 
-//interpret the weather condition from the WMWMOO weather code
+//interpret the weather condition from the WMO weather code
 function interpretWeatherCode(weatherCode) {
     switch (weatherCode) {
         case 0:
