@@ -69,7 +69,7 @@ const FlippingCard = () => {
             />
 
             {!isFlipped && (
-              <div className="absolute ">
+              <div className="absolute">
                 <QuickStats />
               </div>
             )}

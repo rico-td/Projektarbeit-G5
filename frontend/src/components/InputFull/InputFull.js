@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { UilSearch, UilLocationPoint } from "@iconscout/react-unicons";
 
 function InputFull() {
+  const [city, setCity] = useState("");
+
   return (
     <div className="flex justify-center items-center">
       <input
