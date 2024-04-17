@@ -10,7 +10,6 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/loading" element={<LoadingScreen />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>
