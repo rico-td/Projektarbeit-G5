@@ -8,11 +8,11 @@ import style from "./Home.module.css";
 import bgImage from "../assets/img/bg.jpg";
 
 // components
-import InputFull from "../components/InputFull/InputFull.js";
+import InputFields from "../components/InputFields/InputFields.js";
 import CurrentCity from "../components/CurrentCity/CurrentCity";
-import QuickStats from "../components/QuickStats/QuickStats";
+import ForecastDay from "../components/ForecastDay/ForecastDay.jsx";
 import FlippingCard from "../components/FlippingCard/FlippingCard.js";
-
+import ForecastWeek from "../components/ForecastWeek/ForecastWeek.js";
 function Home() {
   // more efficent to update the background-img
   // to update just the img in the component and not the whole component
@@ -24,10 +24,11 @@ function Home() {
       style={{ backgroundImage: `url(${bg})` }}
     >
       <div>
-        <InputFull className="mt-[50px]" />
+        <InputFields className="mt-[50px]" />
       </div>
       <div className="mt-[50px]">
-        <QuickStats />
+        <ForecastDay />
+        <ForecastWeek />
       </div>
     </div>
   );
