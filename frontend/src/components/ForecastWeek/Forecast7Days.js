@@ -11,9 +11,9 @@ import img05 from "../../assets/Forecast7Days/o5.jpg";
 import img06 from "../../assets/Forecast7Days/o6.jpg";
 import img07 from "../../assets/Forecast7Days/o7.jpg";
 
-function Forecast7DaysComponent() {
+function Forecast7Days() {
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-2">
       <FlippingCard />
       <FlippingCard />
       <FlippingCard />
@@ -25,4 +25,4 @@ function Forecast7DaysComponent() {
   );
 }
 
-export default Forecast7DaysComponent;
+export default Forecast7Days;

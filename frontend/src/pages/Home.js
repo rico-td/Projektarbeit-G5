@@ -12,7 +12,6 @@ import InputFull from "../components/InputFull/InputFull.js";
 import CurrentCity from "../components/CurrentCity/CurrentCity";
 import QuickStats from "../components/QuickStats/QuickStats";
 import FlippingCard from "../components/FlippingCard/FlippingCard.js";
-import Forecast7DaysComponent from "../components/Forecast7Days/Forecast7DaysComponent.js";
 
 function Home() {
   // more efficent to update the background-img
@@ -29,7 +28,6 @@ function Home() {
       </div>
       <div className="mt-[50px]">
         <QuickStats />
-        <Forecast7DaysComponent />
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ import img02 from "../../assets/Forecast7Days/o2.jpg";
 import style from "./FlippingCard.module.css";
 
 // components
-import QuickStats from "../QuickStats/QuickStats.jsx";
+import ForecastDay from "../ForecastDay/ForecastDay.jsx";
 
 const FlippingCard = () => {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -70,7 +70,7 @@ const FlippingCard = () => {
 
             {!isFlipped && (
               <div className="absolute">
-                <QuickStats />
+                <ForecastDay />
               </div>
             )}
             {isFlipped && (

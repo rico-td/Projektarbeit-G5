@@ -10,7 +10,7 @@ function QuickStats(cityName, units) {
     queryKey: ["dataCity"],
     queryFn: () =>
       fetch(
-        "https://api.openweathermap.org/data/2.5/weather?q=london&appid=cceeb21005081f70dafeafa10dfdff59&units=metric"
+        "https://api.openweathermap.org/data/2.5/weather?q=berlin&appid=cceeb21005081f70dafeafa10dfdff59&units=metric"
       ).then((res) => res.json()),
   });
 
@@ -19,16 +19,16 @@ function QuickStats(cityName, units) {
   if (!isSuccess) return null;
 
   return (
-    <div className="flex flex-col justify-center items-center gap-4 cursor-default">
+    <div className="flex flex-col justify-center items-center gap-4 cursor-default select-none">
       <div>
-        <h2 className="flex justify-center items-center text-white text-5xl my-3">
+        <h2 className="flex justify-center items-center text-white text-5xl mb-3">
           {Math.round(data.main.temp)}°C
         </h2>
 
         <div>
           <div className="flex flex-col items-center justify-center">
-            <TiWeatherSunny size="25" color="#ffffff" />
-            <h3 className="text-white">{data.weather.main}</h3>
+            {/* <TiWeatherSunny size="25" color="#ffffff" /> */}
+            <h3 className="text-white">{data.weather[0].main}</h3>
           </div>
 
           <div className="flex items-center justify-center gap-1 mt-1">
