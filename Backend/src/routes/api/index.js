@@ -87,7 +87,56 @@ ApiRouter.get("/currentday", async(req, res) => {
     }
   });
 
-//interpret the weather condition from the WMO weather code
+//returns the prediction for subsequent three hours
+ApiRouter.get("/currentdayhourly", async(req, res) => {
+
+    const { latitude, longitude } = req.query;
+
+    const { API_KEY } = process.env;
+    
+    const apiQuery = `http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`;
+    
+    try {
+        const response = await axios.get(apiQuery);
+        
+        const dailyData = response.data.list;
+    
+        const responseData = {
+            forecasts: dailyData.map((item, index) => {
+                const temperature = item.main.temp
+                const maxTemperatureCelsius = item.main.temp_max;
+                const minTemperatureCelsius = item.main.temp_min;
+                const windSpeed = item.wind.speed;
+                const weatherCondition = item.weather[0].description;
+                const [date, time] = item.dt_txt.split(' ');
+                const humidity = item.main.humidity;
+    
+                return {
+                    date,
+                    time,
+                    temperature_celsius: Math.round(temperature),
+                    min_temperature_celsius: Math.round(minTemperatureCelsius),
+                    max_temperature_celsius: Math.round(maxTemperatureCelsius),
+                    temperature_fahrenheit: Math.round(celsiusToFahrenheit(temperature)),
+                    min_temperature_fahrenheit: Math.round(celsiusToFahrenheit(minTemperatureCelsius)),
+                    max_temperature_fahrenheit: Math.round(celsiusToFahrenheit(maxTemperatureCelsius)),
+                    wind_speed: windSpeed,
+                    description: weatherCondition,
+                    humidity: humidity
+                };
+            })
+        };
+    
+        res.status(StatusCodes.OK).json({ responseData });
+    } catch (e) {
+        console.log("error occurred during fetching upcoming days weather", e);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).send("Error fetching upcoming days data");
+    }
+    
+    })
+    
+
+  //interpret the weather condition from the WMO weather code
 function interpretWeatherCode(weatherCode) {
     switch (weatherCode) {
         case 0:
@@ -176,8 +225,8 @@ try {
             const maxTemperatureCelsius = maxTemperaturesCelsius[index];
             const minTemperatureCelsius = minTemperaturesCelsius[index];
             const windSpeed = windSpeeds[index];
-            const sunrise = sunrises[index].substring(11, 16);;
-            const sunset = sunsets[index].substring(11, 16);;
+            const sunrise = sunrises[index].substring(11, 16);
+            const sunset = sunsets[index].substring(11, 16);
             const weatherCode = weatherCodes[index];
             const weatherCondition = interpretWeatherCode(weatherCode);
 
