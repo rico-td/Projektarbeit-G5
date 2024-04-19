@@ -5,14 +5,15 @@ import { useState } from "react";
 import style from "./Home.module.css";
 
 // image
-import bgImage from "../assets/img/bg.jpg";
+import bgImage from "../assets/img/bg2.jpg";
 
 // components
 import InputFields from "../components/InputFields/InputFields.js";
 import CurrentCity from "../components/CurrentCity/CurrentCity";
-import ForecastDay from "../components/ForecastDay/ForecastDay.jsx";
-import FlippingCard from "../components/FlippingCard/FlippingCard.js";
-import ForecastWeek from "../components/ForecastWeek/ForecastWeek.js";
+
+import HourlyForecast from "../components/Forecast/HourlyForecast/HourlyForecast.jsx";
+import DailyForecast from "../components/Forecast/DailyForecast/DailyForecast.jsx";
+
 function Home() {
   // more efficent to update the background-img
   // to update just the img in the component and not the whole component
@@ -20,16 +21,13 @@ function Home() {
 
   return (
     <div
-      className="flex flex-col items-center w-[100vw] h-[100vh] p-[50px]"
+      className="flex flex-col items-center w-[100vw] h-[100vh] p-5"
       style={{ backgroundImage: `url(${bg})` }}
     >
-      <div>
-        <InputFields className="mt-[50px]" />
-      </div>
-      <div className="mt-[50px]">
-        <ForecastDay />
-        <ForecastWeek />
-      </div>
+      <InputFields />
+      <HourlyForecast />
+      <DailyForecast />
+      {/* <CurrentCity /> */}
     </div>
   );
 }

@@ -7,7 +7,7 @@ function InputFull() {
   return (
     <div className="flex justify-center items-center">
       <input
-        className="text-xl font-light p-1.5 shadow-xl focus:outline-none capitalize placeholder:lowercase rounded-3xl text-center align-middle"
+        className="text-l font-light p-1.5 shadow-xl focus:outline-none capitalize placeholder:lowercase rounded-3xl text-center align-middle"
         type="search"
         placeholder="search for city..."
       />
@@ -23,14 +23,14 @@ function InputFull() {
 
         <button
           name="metric"
-          className="text-white cursor-pointer mx-1 text-l hover:scale-125"
+          className="text-white cursor-pointer mx-1 text-l hover:scale-125 font-semibold"
         >
           °C
         </button>
         <p className="text-white cursor-default"> |</p>
         <button
           name="imperial"
-          className="text-white cursor-pointer mx-1 text-l hover:scale-125"
+          className="text-white cursor-pointer mx-1 text-l hover:scale-125 font-semibold"
         >
           °F
         </button>

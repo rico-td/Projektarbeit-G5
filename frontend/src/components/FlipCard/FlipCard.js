@@ -8,12 +8,12 @@ import img01 from "../../assets/Forecast7Days/o1.jpg";
 import img02 from "../../assets/Forecast7Days/o2.jpg";
 
 // styles
-import style from "./FlippingCard.module.css";
+import style from "./FlipCard.module.css";
 
 // components
-import ForecastDay from "../ForecastDay/ForecastDay.jsx";
+import ForecastDay from "../Forecast/CurrentWeather/CurrentWeather.jsx";
 
-const FlippingCard = () => {
+const FlipCard = () => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [randomImage, setRandomImage] = useState(getRandomImage());
@@ -30,9 +30,7 @@ const FlippingCard = () => {
       require("../../assets/Forecast7Days/o7.jpg"),
     ];
     const randomIndex = Math.floor(Math.random() * images.length);
-
-    console.log(Math.floor(Math.random() * images.length));
-    return images[randomIndex];
+    return images[2];
   }
 
   function handleFlip() {
@@ -46,24 +44,20 @@ const FlippingCard = () => {
   }
 
   return (
-    <div className="flex items-center justify-center h-[300px] cursor-pointer mt-[100px]">
-      <div
-        className="flip-card w-[200px] h-[300px] rounded-md"
-        onClick={handleFlip}
-      >
+    <div className="flex items-center justify-center h-[300px]">
+      <div className="flip-card w-[200px] h-[300px]" onClick={handleFlip}>
         <motion.div
-          className="flip-card-inner w-[100%] h-[100%]"
+          className="flip-card-inner w-[100%] h-[100%] "
           initial={false}
           animate={{ rotateY: isFlipped ? 180 : 0 }}
           transition={{
             duration: 0.5,
-            animationDirection: "normal",
           }}
           onAnimationComplete={() => setIsAnimating(false)}
         >
-          <div className="flip-card-front w-[100%] h-[100%] flex justify-center items-center hover:-translate-y-10 hover:border-1px transform transition-transform duration-500 ease-in-out">
+          <div className="flip-card-front w-[100%] h-[100%] flex justify-center items-center">
             <img
-              className="rounded-3xl"
+              className=""
               src={isFlipped ? randomImage : randomImage}
               alt="img"
             />
@@ -90,4 +84,4 @@ const FlippingCard = () => {
   );
 };
 
-export default FlippingCard;
+export default FlipCard;

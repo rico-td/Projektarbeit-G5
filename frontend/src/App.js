@@ -1,5 +1,5 @@
 import { HashRouter, BrowserRouter, Routes, Route } from "react-router-dom";
-import { Home, LoadingScreen } from "./pages";
+import { Home } from "./pages";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
