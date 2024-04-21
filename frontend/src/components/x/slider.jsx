@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Pagination,
-  Navigation,
-  EffectCoverflow,
-  Mousewheel,
-  Keyboard,
-} from "swiper/modules";
+import { Pagination, Mousewheel } from "swiper/modules";
 
 // Import Swiper styles
 import "swiper/css";
@@ -18,17 +12,16 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 function Slider() {
   return (
-    <div className="flex justify-center items-center w-[950px] h-[260px] my-5">
+    <div className="flex justify-center items-center w-[950px] h-[280px] my-5">
       <Swiper
         grabCursor={true}
         loop={true}
         spaceBetween={5}
         mousewheel={true}
-        pagination={{ clickable: true }}
-        keyboard={true}
+        pagination={true}
         slidesPerView={5}
         navigation={true}
-        modules={[Pagination, Mousewheel, Keyboard]}
+        modules={[Pagination]}
         className="w-[100%] h-[100%]"
       >
         <SwiperSlide>

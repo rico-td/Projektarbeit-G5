@@ -9,8 +9,14 @@ function CurrentLocationAndTime() {
   const month = date.toLocaleString("default", { month: "long" });
 
   // GET TIME
-  const hour = date.getHours().toString().padStart(2, "0"); // Fügt eine führende Null hinzu, wenn die Stunde einstellig ist
-  const minutes = date.getMinutes().toString().padStart(2, "0"); // Fügt eine führende Null hinzu, wenn die Minute einstellig ist
+  const time = {
+    hour12: true,
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZone: "GMT",
+  };
+
+  const hour = date.toLocaleString("en-US", time); // Stunden im 12-Stunden-Format in englischer Sprache im GMT+2-Format
 
   return (
     <div className="text-white flex flex-col justify-center items-center my-[35px] cursor-default">
@@ -20,7 +26,7 @@ function CurrentLocationAndTime() {
 
       <div>
         <p className="text-white text-[20px] font-extralight">
-          {`${weekday}, ${day} ${month} ${year} | Local Time: ${hour} ${minutes} PM`}
+          {`${weekday}, ${day} ${month} ${year} | Local Time: ${hour}`}
           {/* Saturday, 12 April 2024 | Local Time: 1:45 PM */}
         </p>
       </div>

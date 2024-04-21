@@ -10,8 +10,6 @@ import bgImage from "../assets/img/bg2.jpg";
 // components
 import InputFields from "../components/InputFields/InputFields.js";
 import CurrentLocationAndTime from "../components/CurrentLocationAndTime/CurrentLocationAndTime.jsx";
-import CurrentWeather from "../components/CurrentWeather/CurrentWeather.jsx";
-import FlipCard from "../components/FlipCard/FlipCard.jsx";
 import Slider from "../components/x/slider.jsx";
 
 function Home() {
@@ -22,7 +20,7 @@ function Home() {
 
   return (
     <div
-      className="flex flex-col items-center py-[25px] mx-auto w-[100vw] h-[100vh] p-5"
+      className="flex flex-col items-center px-[20px] mx-auto w-[100vw] h-[100vh]"
       style={{ backgroundImage: `url(${bg})` }}
     >
       <InputFields />
