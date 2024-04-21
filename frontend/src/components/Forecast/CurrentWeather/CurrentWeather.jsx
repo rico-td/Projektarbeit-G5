@@ -5,7 +5,7 @@ import { WiHumidity } from "react-icons/wi";
 import { TiWeatherSunny } from "react-icons/ti";
 import { FaWind } from "react-icons/fa6";
 
-function QuickStats(cityName, units) {
+function CurrentWeather(cityName, units) {
   const { data, error, isLoading, isSuccess } = useQuery({
     queryKey: ["dataCity"],
     queryFn: () =>
@@ -19,9 +19,9 @@ function QuickStats(cityName, units) {
   if (!isSuccess) return null;
 
   return (
-    <div className="flex flex-col justify-center items-center gap-4 cursor-default select-none">
+    <div className="flex flex-col justify-center items-center gap-4 select-none text-[1rem]">
       <div>
-        <h2 className="flex justify-center items-center text-white text-5xl mb-3">
+        <h2 className="flex justify-center items-center text-white mb-3">
           {Math.round(data.main.temp)}°C
         </h2>
 
@@ -48,4 +48,4 @@ function QuickStats(cityName, units) {
   );
 }
 
-export default QuickStats;
+export default CurrentWeather;

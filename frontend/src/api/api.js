@@ -5,7 +5,7 @@ const baseURL = "api.openweathermap.org/data/2.5/forecast";
 
 const axiosClient = axios.create({
   baseURL:
-    "api.openweathermap.org/data/2.5/weather?appid=cceeb21005081f70dafeafa10dfdff59&q=london&units=metric",
+    "api.openweathermap.org/data/2.5/weather?appid=cceeb21005081f70dafeafa10dfdff59&q=berlin&units=metric",
 });
 
 export default axiosClient;
