@@ -46,5 +46,9 @@
     "@tanstack/eslint-plugin-query": "^5.28.11",
     "react-router-dom": "^6.22.3",
     "tailwindcss": "^3.4.3"
-  }
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "tailwind.config.js",
+  "author": "",
+  "license": "ISC"
 }
