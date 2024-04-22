@@ -1,55 +1,50 @@
-import { Swiper, SwiperSlide } from "swiper/react";
+import React from "react";
+import { Pagination, Mousewheel } from "swiper/modules";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/navigation";
 import "./DailyForecast.module.css";
-import "swiper/css/effect-coverflow";
 
-// import required modules
-import { Pagination, Navigation, Mousewheel, Keyboard } from "swiper/modules";
-
-// components
 import FlipCard from "../../FlipCard/FlipCard.jsx";
 
-export default function Slider() {
-  // const slides = Array.from({ length: 7 }, (_, index) => (
-  //   <SwiperSlide key={index}>
-  //     <FlipCard />
-  //   </SwiperSlide>
-  // ));
+import { Swiper, SwiperSlide } from "swiper/react";
+
+function DailyForecast({ data }) {
+  console.log("RECEIVED FROM DailyForecast.js:", data);
+  if (!data) {
+    return <div>Loading...</div>;
+  }
   return (
-    <div className="flex flex-col justify-center items-center h-[400px] w-[700px]">
-      <p className="text-xl my-3 underline text-white">Daily Forecast</p>
-      <div className="flex justify-center items-center h-[100%] w-[100%] my-2">
-        <Swiper
-          spaceBetween={5}
-          pagination={{ clickable: true }}
-          modules={[Pagination, Mousewheel, Keyboard, Navigation]}
-          grabCursor={true}
-          mousewheel={true}
-          navigation={true}
-          slidesPerView={3}
-          loop={true}
-          keyboard={true}
-          className="flex justify-center items-center h-[100%]"
-        >
-          <SwiperSlide>
-            <FlipCard />
+    <div className="flex justify-center items-center w-[950px] h-[280px] my-5">
+      <Swiper
+        grabCursor={true}
+        loop={true}
+        spaceBetween={5}
+        mousewheel={true}
+        pagination={true}
+        slidesPerView={5}
+        navigation={true}
+        modules={[Pagination]}
+        className="w-[100%] h-[100%]"
+      >
+        {data.map((forecast, index) => (
+          <SwiperSlide key={index}>
+            <div className="flex justify-center items-center">
+              <FlipCard
+                temperature={forecast.temperature_celsius}
+                description={forecast.description}
+                windSpeed={forecast.wind_speed}
+                humidity={forecast.humidity}
+                temp_min={forecast.min_temperature_celsius}
+                temp_max={forecast.max_temperature_celsius}
+              />
+            </div>
           </SwiperSlide>
-          <SwiperSlide>
-            <FlipCard />
-          </SwiperSlide>
-          <SwiperSlide>
-            <FlipCard />
-          </SwiperSlide>
-          <SwiperSlide>
-            <FlipCard />
-          </SwiperSlide>
-        </Swiper>
-        {/* {slides} */}
-      </div>
+        ))}
+      </Swiper>
     </div>
   );
 }
+
+export default DailyForecast;

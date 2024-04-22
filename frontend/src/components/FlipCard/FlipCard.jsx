@@ -5,7 +5,14 @@ import ReactCardFlip from "react-card-flip";
 
 import CurrentWeather from "../CurrentWeather/CurrentWeather";
 
-function FlipCard() {
+function FlipCard({
+  temperature,
+  description,
+  windSpeed,
+  humidity,
+  temp_min,
+  temp_max,
+}) {
   const [isFlipped, setIsFlipped] = useState(false);
   const [randomImage, setRandomImage] = useState(getRandomImage());
 
@@ -34,7 +41,14 @@ function FlipCard() {
         style={{ backgroundImage: `url(${randomImage})` }}
         onClick={handleFlip}
       >
-        <CurrentWeather />
+        <CurrentWeather
+          temperature
+          description
+          windSpeed
+          humidity
+          temp_min
+          temp_max
+        />
       </div>
       <div
         className={`${style.card} ${style.back}`}

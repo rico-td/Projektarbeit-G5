@@ -5,10 +5,10 @@ import { TiWeatherCloudy } from "react-icons/ti";
 import { FaWind } from "react-icons/fa6";
 import { FaTemperatureHigh, FaTemperatureLow } from "react-icons/fa";
 
-function CurrentWeather() {
+function CurrentWeather({ data }) {
   return (
     <div className="flex flex-col justify-center items-center">
-      <p className="underline">TODAY</p>
+      <p className="underline">date</p>
       <div className="flex flex-col justify-center items-center gap-3">
         <div className="flex justify-center items-center gap-5 my-5">
           <div className="flex flex-col justify-center items-center">

@@ -6,7 +6,7 @@ async function fetchCurrentDay(cityName) {
   });
 
   const forecastToday = result.data.responseData;
-  console.log("RECEIVED FROM QUERIES.JS: ", forecastToday);
+  console.log("RECEIVED FROM queries.js: ", forecastToday);
   return forecastToday;
 }
 
