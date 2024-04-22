@@ -1,5 +1,5 @@
 // tools
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // style
 import style from "./Home.module.css";
@@ -12,7 +12,28 @@ import InputFields from "../components/InputFields/InputFields.js";
 import CurrentLocationAndTime from "../components/CurrentLocationAndTime/CurrentLocationAndTime.jsx";
 import Slider from "../components/x/slider.jsx";
 
+// fetching data
+import { fetchCurrentDay } from "../api/queries.js";
+
 function Home() {
+  const [city, setCity] = useState("Berlin");
+  const [forecastData, setForecastData] = useState(null);
+
+  async function fetchCityAndTime() {
+    try {
+      const jsonResponse = await fetchCurrentDay(city);
+      console.log("RECEIVED FROM HOME.JS:", jsonResponse);
+
+      setForecastData(jsonResponse);
+    } catch (e) {
+      console.log("Error", e);
+    }
+  }
+
+  useEffect(() => {
+    fetchCityAndTime();
+  }, []);
+
   //
   // more efficent to update the background-img
   // to update just the img in the component and not the whole component
@@ -24,10 +45,7 @@ function Home() {
       style={{ backgroundImage: `url(${bg})` }}
     >
       <InputFields />
-      <CurrentLocationAndTime />
-
-      {/* <FlipCard /> */}
-      <Slider />
+      <CurrentLocationAndTime cityName={city} />
       <Slider />
     </div>
   );

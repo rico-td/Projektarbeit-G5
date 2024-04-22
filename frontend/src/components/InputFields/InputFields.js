@@ -3,9 +3,7 @@ import { UilSearch, UilLocationPoint } from "@iconscout/react-unicons";
 import { TbMenu2 } from "react-icons/tb";
 import { MdOutlineLogin } from "react-icons/md";
 
-const InputFields = (onSearchChange) => {
-  const [city, setCity] = useState("");
-
+const InputFields = () => {
   return (
     <div className="flex justify-between p-5 w-[100%] border-b-2 border-white border-opacity-50 py-8">
       <TbMenu2

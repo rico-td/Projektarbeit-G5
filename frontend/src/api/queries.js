@@ -1,13 +1,13 @@
-import React from "react";
-import { useQuery } from "@tanstack/react-query";
-import axiosClient from "./api.js";
+import api from "./api.js";
 
-function DataCurrentCity() {}
+async function fetchCurrentDay(cityName) {
+  const result = await api.get("/api/getweather/currentday", {
+    params: { cityName },
+  });
 
-export default DataCurrentCity;
+  const forecastToday = result.data.responseData;
+  console.log("RECEIVED FROM QUERIES.JS: ", forecastToday);
+  return forecastToday;
+}
 
-//   return useQuery(["weather", cityName, units], async () => {
-//     const response = await axiosClient.get(`?q=${cityName}&units=${units}`);
-//     return response.data;
-//   });
-//
+export { fetchCurrentDay };

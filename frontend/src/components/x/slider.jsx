@@ -10,7 +10,7 @@ import FlipCard from "../FlipCard/FlipCard.jsx";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
-function Slider() {
+function Slider({ forecastData }) {
   return (
     <div className="flex justify-center items-center w-[950px] h-[280px] my-5">
       <Swiper
