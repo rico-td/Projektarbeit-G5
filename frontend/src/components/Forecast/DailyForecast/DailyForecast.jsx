@@ -39,6 +39,7 @@ function DailyForecast({ data }) {
                 temp_min={forecast.min_temperature_celsius}
                 temp_max={forecast.max_temperature_celsius}
                 time={forecast.time}
+                main_description={forecast.main_description}
                 // sunrise={forecast.sunrise}
                 // sunset={forecast.sunset}
               />

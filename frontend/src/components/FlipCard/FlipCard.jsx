@@ -12,6 +12,7 @@ import { FaTemperatureHigh, FaTemperatureLow } from "react-icons/fa";
 import img from "../../assets/Forecast7Days/o3.jpg";
 function FlipCard({
   temperature,
+  main_description,
   description,
   windSpeed,
   humidity,
@@ -60,7 +61,7 @@ function FlipCard({
             <div className="flex flex-col justify-center items-center gap-5 my-5">
               <div className="flex flex-col justify-center items-center">
                 <TiWeatherCloudy size="45" color="#ffffff" />
-                <p className="">{description}</p>
+                <p className="">{main_description}</p>
               </div>
               <p className="text-2xl">{`${temperature} °C`}</p>
             </div>
