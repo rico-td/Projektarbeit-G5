@@ -11,7 +11,7 @@ import FlipCard from "../../FlipCard/FlipCard.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 function DailyForecast({ data }) {
-  console.log("RECEIVED FROM DailyForecast.js:", data);
+  // console.log("RECEIVED FROM DailyForecast.js:", data);
   if (!data) {
     return <div>Loading...</div>;
   }
@@ -38,6 +38,9 @@ function DailyForecast({ data }) {
                 humidity={forecast.humidity}
                 temp_min={forecast.min_temperature_celsius}
                 temp_max={forecast.max_temperature_celsius}
+                time={forecast.time}
+                // sunrise={forecast.sunrise}
+                // sunset={forecast.sunset}
               />
             </div>
           </SwiperSlide>

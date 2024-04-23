@@ -13,7 +13,7 @@ async function fetchCurrentDay(cityName) {
 // subsequent temperature for every 3 hours for 5 days
 async function fetchCurrentDayHourlyData(latitude, longitude) {
   const result = await api.get("/api/getweather/currentdayhourly", {
-    params: { latitude, longitude }
+    params: { latitude, longitude },
   });
 
   const forecastCurrentDayHourly = result.data.responseData;
@@ -24,7 +24,7 @@ async function fetchCurrentDayHourlyData(latitude, longitude) {
 // for 7 days
 async function fetchUpcomingDays(latitude, longitude) {
   const result = await api.get("/api/getweather/upcomingdays", {
-    params: { latitude, longitude }
+    params: { latitude, longitude },
   });
 
   const forecastUpcomingDays = result.data.responseData;
