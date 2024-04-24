@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signupUser } from "../../api/userQueries";
+import bg from "../../assets/img/bg.jpg";
 
 function Signup() {
   const [name, setName] = useState("");
@@ -35,7 +36,7 @@ function Signup() {
   };
 
   return (
-    <div className="container">
+    <div className="container" style={{ backgroundImage: `url(${bg})` }}>
       <div className="row justify-content-center align-items-center vh-100">
         <div className="col-md-6">
           <div className="bg-white p-3 rounded">

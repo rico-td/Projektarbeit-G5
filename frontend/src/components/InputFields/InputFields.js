@@ -63,7 +63,7 @@ const InputFields = ({ onSearchChange }) => {
           </button>
         </div>
       </div>
-      <Link to="/">
+      <Link to="/Login">
         <MdOutlineLogin
           size={35}
           className="text-white cursor-pointer transition ease-out hover:scale-125 mx-1"
