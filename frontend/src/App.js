@@ -3,7 +3,7 @@ import { Home } from "./pages";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Login from "./pages/Login_Signup/Login";
 import Signup from "./pages/Login_Signup/Signup";
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 
 const queryClient = new QueryClient();
 

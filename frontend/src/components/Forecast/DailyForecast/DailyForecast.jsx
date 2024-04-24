@@ -4,7 +4,6 @@ import { Pagination } from "swiper/modules";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
-import "./DailyForecast.module.css";
 
 import FlipCard from "../../FlipCard/FlipCard.jsx";
 
