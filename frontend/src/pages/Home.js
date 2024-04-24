@@ -11,15 +11,17 @@ import bgImg from "../assets/img/bg.jpg";
 import InputFields from "../components/InputFields/InputFields.js";
 import CurrentLocationAndTime from "../components/CurrentLocationAndTime/CurrentLocationAndTime.jsx";
 import HourlyForecast from "../components/Forecast/HourlyForecast/HourlyForecast.jsx";
+import DailyForecast from "../components/Forecast/DailyForecast/DailyForecast.jsx";
 
 // fetching data
-import { fetchCurrentDay } from "../api/queries.js";
+import { fetchCurrentDay, fetchUpcomingDays } from "../api/queries.js";
 
 // --------------------------------------------------------------------
 
 function Home() {
   const [city, setCity] = useState("Berlin");
-  const [forecastData, setForecastData] = useState(null);
+  const [DataHourly, setDataHourly] = useState(null);
+  const [DataDaily, setDataDaily] = useState(null);
   const [latitude, setLatitude] = useState("52.5244");
   const [longitude, setLongitude] = useState("13.4105");
   const [isLoading, setIsLoading] = useState(false);
@@ -28,11 +30,27 @@ function Home() {
   async function fetchForecastHourly() {
     setIsLoading(true);
     try {
-      const jsonResponse = await fetchCurrentDay(city);
+      const jsonHourly = await fetchCurrentDay(city);
+      const lat = jsonHourly.latitudeCoordinateResponse;
+      const lon = jsonHourly.longitudeCoordinateResponse;
+      setLatitude(lat);
+      setLongitude(lon);
+      setDataHourly(jsonHourly);
+      await fetchForecastDaily(lat, lon);
+    } catch (e) {
+      console.log("Error", e);
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
-      setForecastData(jsonResponse);
-      setLatitude(jsonResponse.latitudeCoordinateResponse);
-      setLongitude(jsonResponse.longitudeCoordinateResponse);
+  // fetching data upcoming days
+  async function fetchForecastDaily(lat, lon) {
+    setIsLoading(true);
+    try {
+      const jsonDaily = await fetchUpcomingDays(lat, lon);
+
+      setDataDaily(jsonDaily);
     } catch (e) {
       console.log("Error", e);
     } finally {
@@ -41,20 +59,11 @@ function Home() {
   }
 
   useEffect(() => {
-    // Führe fetchCityAndTime nur aus, wenn city nicht leer ist
+    // Führe fetchForecastHourly nur aus, wenn city nicht leer ist
     if (city) {
-      fetchForecastHourly(city);
+      fetchForecastHourly();
     }
   }, [city]);
-
-  useEffect(() => {
-    // Überprüfe, ob die Daten geladen sind, bevor sie ausgegeben werden
-    if (!isLoading) {
-      console.log("DATA CURRENT DAY FROM Home.js:", forecastData);
-      console.log("LATITUDE FROM Home.js:", latitude);
-      console.log("LONGITUDE FROM Home.js:", longitude);
-    }
-  }, [isLoading, forecastData, latitude, longitude]);
 
   const handleSearchChange = async (cityName) => {
     setCity(cityName);
@@ -69,17 +78,19 @@ function Home() {
       style={{ backgroundImage: `url(${bg})` }}
     >
       <InputFields onSearchChange={handleSearchChange} />
-      {forecastData && !isLoading && (
+      {DataHourly && !isLoading && (
         <CurrentLocationAndTime
-          cityName={forecastData?.cityNameResponse}
-          localTime={forecastData?.cityNameResponse}
+          cityName={DataHourly?.cityNameResponse}
+          localTime={DataHourly?.cityNameResponse}
         />
       )}
       <HourlyForecast
-        data={forecastData?.forecasts}
-        sunrise={forecastData?.sunrise}
-        sunset={forecastData?.sunset}
+        data={DataHourly?.forecasts}
+        sunrise={DataHourly?.sunrise}
+        sunset={DataHourly?.sunset}
       />
+
+      <DailyForecast data={DataDaily?.forecasts} />
     </div>
   );
 }

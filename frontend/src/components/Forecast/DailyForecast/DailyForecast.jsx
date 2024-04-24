@@ -1,31 +1,50 @@
 import React from "react";
-import { useState } from "react";
-import style from "./HourlyForecast.module.css";
+import { Pagination } from "swiper/modules";
 
-// background-img
-import bgToday from "../../../assets/ForecastDay/o3.jpg";
-import ForecastOneHour from "./ForecastOneHour/ForecastOneHour.jsx";
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
 
-function HourlyForecast() {
-  const [bg] = useState(bgToday);
+import FlipCardDaily from "../../FlipCardDaily/FlipCardDaily.jsx";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+
+function DailyForecast({ data }) {
+  // console.log("RECEIVED FROM DailyForecast.js:", data);
+  if (!data) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <div
-      className={`${style.containerToday} flex flex-col justify-center items-center w-[85%] h-[200px] my-10 text-white`}
-      // style={{ backgroundImage: `url(${bg})` }}
-    >
-      <p className="text-xl my-2 underline">Hourly Forecast</p>
-
-      <div className="flex justify-center items-center w-[100%] h-[100%] gap-3">
-        <ForecastOneHour />
-        <ForecastOneHour />
-        <ForecastOneHour />
-        <ForecastOneHour />
-        <ForecastOneHour />
-        <ForecastOneHour />
-      </div>
+    <div className="flex flex-col justify-center items-center w-[950px] h-[350px] my-1">
+      <p className="mb-2 p-2 text-2xl font-extralight bg-white bg-opacity-[0.3] rounded-xl">
+        Daily Forecast 7 Days
+      </p>
+      <Swiper
+        grabCursor={true}
+        loop={true}
+        spaceBetween={5}
+        pagination={true}
+        slidesPerView={5}
+        modules={[Pagination]}
+        className="w-[100%] h-[100%]"
+      >
+        {data.map((forecast, index) => (
+          <SwiperSlide key={index}>
+            <div className="flex justify-center items-center">
+              <FlipCardDaily
+                temperature={forecast.temperature_celsius}
+                temp_min={forecast.min_temperature_celsius}
+                temp_max={forecast.max_temperature_celsius}
+                description={forecast.description}
+                date={forecast.date}
+              />
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
   );
 }
 
-export default HourlyForecast;
+export default DailyForecast;

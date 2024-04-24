@@ -5,19 +5,19 @@ import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
-import FlipCard from "../../FlipCard/FlipCard.jsx";
+import FlipCardHourly from "../../FlipCardHourly/FlipCardHourly.jsx";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
 function DailyForecast({ data, sunrise, sunset }) {
-  // console.log("RECEIVED FROM DailyForecast.js:", data);
+  console.log("RECEIVED FROM DailyForecast.js:", data);
   if (!data) {
-    return <div>Loading...</div>;
+    return <div className="flex justify-center items-center">Loading...</div>;
   }
   return (
-    <div className="flex flex-col justify-center items-center w-[950px] h-[350px] my-5">
-      <p className="mb-2 p-3 text-2xl font-extralight bg-white bg-opacity-[0.3] rounded-xl">
-        Three-hourly Forecast
+    <div className="flex flex-col justify-center items-center w-[950px] h-[350px] my-1">
+      <p className="mb-2 p-2 text-2xl font-extralight bg-white bg-opacity-[0.3] rounded-xl">
+        Three-Hourly Forecast
       </p>
       <Swiper
         grabCursor={true}
@@ -31,7 +31,7 @@ function DailyForecast({ data, sunrise, sunset }) {
         {data.map((forecast, index) => (
           <SwiperSlide key={index}>
             <div className="flex justify-center items-center">
-              <FlipCard
+              <FlipCardHourly
                 temperature={forecast.temperature_celsius}
                 description={forecast.description}
                 windSpeed={forecast.wind_speed}

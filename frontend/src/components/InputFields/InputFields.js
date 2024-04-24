@@ -22,7 +22,7 @@ const InputFields = ({ onSearchChange }) => {
   };
 
   return (
-    <div className="flex justify-between p-5 w-[100%] border-b-2 border-white border-opacity-50 py-8">
+    <div className="flex justify-between p-3 w-[100%] border-b-2 border-white border-opacity-50 py-4">
       <TbMenu2
         size={35}
         className="text-white cursor-pointer transition ease-out hover:scale-125 mx-1"

@@ -32,7 +32,7 @@ function CurrentLocationAndTime({ cityName }) {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center my-[35px] cursor-default bg-white bg-opacity-[0.3] p-3 rounded-xl">
+    <div className="flex flex-col justify-center items-center my-[35px] cursor-default bg-white bg-opacity-[0.3] py-2 px-7 rounded-xl">
       <div>
         <p className="text-2xl">{cityName}</p>
       </div>
