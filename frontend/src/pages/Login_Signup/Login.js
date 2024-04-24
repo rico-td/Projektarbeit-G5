@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import bg from "../../assets/img/bg.jpg";
+
 function Login() {
   const [values, setValues] = useState({
     email: "",
@@ -32,7 +34,10 @@ function Login() {
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center bg-primary vh-100">
+    <div
+      className="d-flex justify-content-center align-items-center bg-primary vh-100"
+      style={{ backgroundImage: `url(${bg})` }}
+    >
       <div className="bg-white p-3 rounded w-25">
         <h2>Login</h2>
         <form action="" onSubmit={handleSubmit}>
