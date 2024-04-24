@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import logo from "../../assets/img/logo.png";
 
 function CurrentLocationAndTime({ cityName }) {
   // if (!cityName) return null;
@@ -32,13 +33,11 @@ function CurrentLocationAndTime({ cityName }) {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center my-[35px] cursor-default bg-white bg-opacity-[0.3] py-2 px-7 rounded-xl">
-      <div>
-        <p className="text-2xl">{cityName}</p>
-      </div>
-
-      <div>
-        <p className="text-xl font-extralight">
+    <div className="flex justify-center items-center gap-3 w-[300px] my-[20px] py-3 cursor-default bg-gray-500 bg-opacity-[0.4] rounded-l">
+      <img className="" src={logo} alt="" width="35px" />
+      <div className="flex flex-col">
+        <p className="text-white text-2xl font-light">{cityName}</p>
+        <p className="text-white text-l font-extralight">
           {currentTime.toLocaleTimeString("en-US", options)}
         </p>
       </div>

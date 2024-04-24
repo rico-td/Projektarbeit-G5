@@ -22,7 +22,7 @@ const InputFields = ({ onSearchChange }) => {
   };
 
   return (
-    <div className="flex justify-between p-3 w-[100%] border-b-2 border-white border-opacity-50 py-4">
+    <div className="flex justify-between w-[100%] border-b-2 border-white border-opacity-50 py-4">
       <TbMenu2
         size={35}
         className="text-white cursor-pointer transition ease-out hover:scale-125 mx-1"
@@ -30,7 +30,7 @@ const InputFields = ({ onSearchChange }) => {
 
       <div className="flex justify-center items-center">
         <input
-          className="text-l font-light p-1.5 shadow-xl focus:outline-none capitalize placeholder:lowercase rounded-3xl text-center align-middle"
+          className="text-l font-light p-1.5 mr-5 shadow-xl focus:outline-none capitalize placeholder:lowercase rounded-2xl text-center"
           type="search"
           placeholder="search for city..."
           value={inputValue}

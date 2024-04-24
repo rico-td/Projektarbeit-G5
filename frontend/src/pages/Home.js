@@ -84,6 +84,7 @@ function Home() {
           localTime={DataHourly?.cityNameResponse}
         />
       )}
+
       <HourlyForecast
         data={DataHourly?.forecasts}
         sunrise={DataHourly?.sunrise}

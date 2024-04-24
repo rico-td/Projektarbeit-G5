@@ -16,8 +16,8 @@ function DailyForecast({ data }) {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center w-[950px] h-[350px] my-1">
-      <p className="mb-2 p-2 text-2xl font-extralight bg-white bg-opacity-[0.3] rounded-xl">
+    <div className="flex flex-col justify-center items-start w-[950px] h-[315px] my-3">
+      <p className=" w-[230px] mb-1 text-xl p-1 text-center text-white font-extralight bg-gray-500 bg-opacity-[0.5] rounded-l">
         Daily Forecast 7 Days
       </p>
       <Swiper
