@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import style from "./FlipCard.module.css";
 
 import ReactCardFlip from "react-card-flip";
-import CurrentWeather from "../CurrentWeather/CurrentWeather";
 
 import { WiHumidity } from "react-icons/wi";
 import { FaWind } from "react-icons/fa6";
 import { TiWeatherCloudy } from "react-icons/ti";
 import { FaTemperatureHigh, FaTemperatureLow } from "react-icons/fa";
 
-import img from "../../assets/Forecast7Days/o3.jpg";
+import img from "../../assets/ForecastDay/flipImg.jpg";
+
 function FlipCard({
   temperature,
   main_description,
@@ -52,7 +52,7 @@ function FlipCard({
     <ReactCardFlip flipDirection="horizontal" isFlipped={isFlipped}>
       <div
         className={`${style.card}`}
-        style={{ backgroundImage: `url(${img})`, opacity: "0.8" }}
+        style={{ backgroundImage: `url(${img}) `, opacity: "0.8" }}
         onClick={handleFlip}
       >
         <div className="flex flex-col justify-center items-center">

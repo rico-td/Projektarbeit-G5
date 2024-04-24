@@ -10,7 +10,7 @@ import bgImg from "../assets/img/bg.jpg";
 // components
 import InputFields from "../components/InputFields/InputFields.js";
 import CurrentLocationAndTime from "../components/CurrentLocationAndTime/CurrentLocationAndTime.jsx";
-import DailyForecast from "../components/Forecast/DailyForecast/DailyForecast.jsx";
+import HourlyForecast from "../components/Forecast/HourlyForecast/HourlyForecast.jsx";
 
 // fetching data
 import { fetchCurrentDay } from "../api/queries.js";
@@ -75,7 +75,7 @@ function Home() {
           localTime={forecastData?.cityNameResponse}
         />
       )}
-      <DailyForecast
+      <HourlyForecast
         data={forecastData?.forecasts}
         sunrise={forecastData?.sunrise}
         sunset={forecastData?.sunset}
