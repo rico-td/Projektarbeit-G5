@@ -1,5 +1,5 @@
 import React from "react";
-import { Pagination, Mousewheel } from "swiper/modules";
+import { Pagination } from "swiper/modules";
 
 // Import Swiper styles
 import "swiper/css";
@@ -10,7 +10,7 @@ import FlipCard from "../../FlipCard/FlipCard.jsx";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
-function DailyForecast({ data }) {
+function DailyForecast({ data, sunrise, sunset }) {
   // console.log("RECEIVED FROM DailyForecast.js:", data);
   if (!data) {
     return <div>Loading...</div>;
@@ -21,10 +21,8 @@ function DailyForecast({ data }) {
         grabCursor={true}
         loop={true}
         spaceBetween={5}
-        mousewheel={true}
         pagination={true}
         slidesPerView={5}
-        navigation={true}
         modules={[Pagination]}
         className="w-[100%] h-[100%]"
       >
@@ -39,8 +37,9 @@ function DailyForecast({ data }) {
                 temp_min={forecast.min_temperature_celsius}
                 temp_max={forecast.max_temperature_celsius}
                 time={forecast.time}
-                // sunrise={forecast.sunrise}
-                // sunset={forecast.sunset}
+                main_description={forecast.main_description}
+                sunrise={sunrise}
+                sunset={sunset}
               />
             </div>
           </SwiperSlide>
