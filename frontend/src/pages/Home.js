@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import style from "./Home.module.css";
 
 // image
-import bgImage from "../assets/img/bg2.jpg";
+import bgImg from "../assets/img/bg.jpg";
 
 // components
 import InputFields from "../components/InputFields/InputFields.js";
@@ -61,7 +61,7 @@ function Home() {
   };
 
   // to update just the img in the component and not the whole component, more efficient
-  const [bg] = useState(bgImage);
+  const [bg] = useState(bgImg);
 
   return (
     <div
@@ -75,7 +75,11 @@ function Home() {
           localTime={forecastData?.cityNameResponse}
         />
       )}
-      <DailyForecast data={forecastData?.forecasts} />
+      <DailyForecast
+        data={forecastData?.forecasts}
+        sunrise={forecastData?.sunrise}
+        sunset={forecastData?.sunset}
+      />
     </div>
   );
 }

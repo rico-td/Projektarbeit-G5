@@ -28,7 +28,7 @@ function FlipCard({
     setIsFlipped(!isFlipped);
   }
 
-  function convertTo12HourFormat(time) {
+  function formatTime(time) {
     // Split the time into hours and minutes
     const [hours, minutes] = time.split(":");
 
@@ -46,24 +46,24 @@ function FlipCard({
   }
 
   // Convert the time to 12-hour format
-  const time12 = convertTo12HourFormat(time);
+  const time12 = formatTime(time);
 
   return (
     <ReactCardFlip flipDirection="horizontal" isFlipped={isFlipped}>
       <div
         className={`${style.card}`}
-        style={{ backgroundImage: `url(${img})` }}
+        style={{ backgroundImage: `url(${img})`, opacity: "0.8" }}
         onClick={handleFlip}
       >
         <div className="flex flex-col justify-center items-center">
           <p className="">{`${time12}`}</p>
-          <div className="flex flex-col justify-center items-center gap-3">
-            <div className="flex flex-col justify-center items-center gap-5 my-5">
+          <div className="flex flex-col justify-center items-center">
+            <div className="flex flex-col justify-center items-center my-5">
+              <p className="text-2xl">{`${temperature} °C`}</p>
               <div className="flex flex-col justify-center items-center">
                 <TiWeatherCloudy size="45" color="#ffffff" />
                 <p className="">{main_description}</p>
               </div>
-              <p className="text-2xl">{`${temperature} °C`}</p>
             </div>
 
             <div className="flex justify-center items-center gap-3">
@@ -82,15 +82,15 @@ function FlipCard({
 
       <div
         className={`${style.card} ${style.back}`}
-        style={{ backgroundImage: `url(${img})` }}
+        style={{ backgroundImage: `url(${img})`, opacity: "0.8" }}
         onClick={handleFlip}
       >
         <div className="flex flex-col justify-center items-center">
           <div>
-            <p>{sunrise}</p>
+            <p>{sunrise.slice(0, 5)}</p>
           </div>
           <div>
-            <p>{sunset}</p>
+            <p>{sunset.slice(0, 5)}</p>
           </div>
           <div className="flex items-center justify-center gap-5 mt-1">
             <div className="flex justify-center items-center">
