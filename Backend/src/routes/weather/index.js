@@ -4,71 +4,7 @@ const WeatherSequelize = require("../../database/setup/database");
 const WeatherModel = require("../../database/models/WeatherModel");
 const { where } = require("sequelize");
 
-// Simulated database for weather
-let Weather_tb = [
-  {
-    id: 1,
-    timestamp: "2024-03-23",
-    location: "Munich",
-    temp: 12,
-    humidity: 53,
-    description: "Rain",
-    wind_speed: 12,
-    precipitation: 10,
-  },
-  {
-    id: 2,
-    timestamp: "2024-05-11",
-    location: "Mumbai",
-    temp: 32,
-    humidity: 53,
-    description: "Sun",
-    wind_speed: 10,
-    precipitation: 18,
-  },
-  {
-    id: 3,
-    timestamp: "2024-04-12",
-    location: "Munich",
-    temp: 12,
-    humidity: 53,
-    description: "Rain",
-    wind_speed: 12,
-    precipitation: 10,
-  },
-  {
-    id: 4,
-    timestamp: "2024-04-20",
-    location: "Munich",
-    temp: 12,
-    humidity: 53,
-    description: "Rain",
-    wind_speed: 12,
-    precipitation: 10,
-  },
-];
-
 const WeatherRouter = Router();
-
-// add the data into sql workbench
-async function addWeatherData() {
-  try {
-    //await WeatherModel.bulkCreate(Weather_tb);
-    for (let weatherData of Weather_tb) {
-      // Check if weather data corresponding to particular id already exists
-      const existingWeather = await WeatherModel.findOne({ where: { id: weatherData.id } });
-      
-      // If weather data doesn't exist, create 
-      if (!existingWeather) {
-        await WeatherModel.create(Weather_tb);
-      }
-    }
-  } catch (error) {
-    console.log("error occured during weather add data");
-  }
-}
-
-addWeatherData();
 
 // // Return todos from a specific user
 WeatherRouter.get("/id", (req, res) => {
