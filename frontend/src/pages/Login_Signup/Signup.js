@@ -35,64 +35,82 @@ function Signup() {
   };
 
   return (
-    <div className="container">
-      <div className="row justify-content-center align-items-center vh-100">
-        <div className="col-md-6">
-          <div className="bg-white p-3 rounded">
-            <h2 className="mb-4">Sign-Up</h2>
-            <form onSubmit={handleSubmit}>
-              <div className="mb-3">
-                <label htmlFor="name">
-                  <strong>Name</strong>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter the Name"
-                  name="name"
-                  value={name}
-                  onChange={handleInput}
-                  className="form-control"
-                />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="email">
-                  <strong>Email</strong>
-                </label>
-                <input
-                  type="email"
-                  placeholder="Enter the Email"
-                  name="email"
-                  value={email}
-                  onChange={handleInput}
-                  className="form-control"
-                />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="password">
-                  <strong>Password</strong>
-                </label>
-                <input
-                  type="password"
-                  placeholder="Enter the Password"
-                  name="password"
-                  value={password}
-                  onChange={handleInput}
-                  className="form-control"
-                />
-              </div>
-              <button type="submit" className="btn btn-success w-100 mb-3">
-                <strong>Signup</strong>
-              </button>
-              <p>You agree to our Terms and Policies</p>
-              <Link
-                to="/login"
-                className="btn btn-default w-100 bg-light text-dark mb-3"
-              >
-                <strong>Login</strong>
-              </Link>
-            </form>
+    <div className="min-h-screen bg-gradient-to-r from-pink-400 to-purple-500 flex justify-center items-center">
+      <div className="bg-white shadow-md rounded p-8 max-w-md w-full">
+        <h2 className="text-2xl mb-4 text-center font-bold">Sign Up</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label
+              htmlFor="name"
+              className="block text-gray-700 font-bold mb-2"
+            >
+              Name
+            </label>
+            <input
+              type="text"
+              placeholder="Enter your name"
+              name="name"
+              value={name}
+              onChange={handleInput}
+              className="form-input w-full rounded-md"
+            />
           </div>
-        </div>
+          <div className="mb-4">
+            <label
+              htmlFor="email"
+              className="block text-gray-700 font-bold mb-2"
+            >
+              Email
+            </label>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              name="email"
+              value={email}
+              onChange={handleInput}
+              className="form-input w-full rounded-md"
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="password"
+              className="block text-gray-700 font-bold mb-2"
+            >
+              Password
+            </label>
+            <input
+              type="password"
+              placeholder="Enter your password"
+              name="password"
+              value={password}
+              onChange={handleInput}
+              className="form-input w-full rounded-md"
+            />
+          </div>
+          {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
+          <button
+            type="submit"
+            className="bg-blue-500 text-white w-full py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+          >
+            Sign Up
+          </button>
+          <p className="text-xs mt-2 text-center">
+            By signing up, you agree to our{" "}
+            <Link to="#" className="text-blue-500">
+              Terms
+            </Link>{" "}
+            and{" "}
+            <Link to="#" className="text-blue-500">
+              Privacy Policy
+            </Link>
+            .
+          </p>
+          <div className="text-center mt-4">
+            <Link to="/login" className="text-blue-500 hover:underline">
+              Already have an account? Login here
+            </Link>
+          </div>
+        </form>
       </div>
     </div>
   );

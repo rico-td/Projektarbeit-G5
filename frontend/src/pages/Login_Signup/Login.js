@@ -9,6 +9,7 @@ function Login() {
   });
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleInput = (event) => {
     setValues((prev) => ({
@@ -19,6 +20,15 @@ function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    // Basic validation
+    if (!values.email || !values.password) {
+      setErrorMessage("Please fill in all fields.");
+      return;
+    }
+    // Clear previous error message
+    setErrorMessage("");
+    // Set loading state
+    setIsLoading(true);
     axios
       .post("http://localhost:7070/v1/user/login", values)
       .then((res) => {
@@ -28,53 +38,83 @@ function Login() {
           setErrorMessage("Login failed. Please check your credentials.");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setErrorMessage(
+          "An error occurred while logging in. Please try again later."
+        );
+      })
+      .finally(() => {
+        // Reset loading state
+        setIsLoading(false);
+      });
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center bg-primary vh-100">
-      <div className="bg-white p-3 rounded w-25">
-        <h2>Login</h2>
-        <form action="" onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label htmlFor="email">
-              <strong>Email</strong>
+    <div className="flex justify-center items-center bg-gradient-to-r from-pink-400 to-purple-500 h-screen">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-80">
+        <h2 className="text-2xl mb-4 text-center font-bold">Login</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label
+              htmlFor="email"
+              className="block text-gray-700 font-bold mb-2"
+            >
+              Email
             </label>
             <input
               type="email"
-              placeholder="Enter the Email"
+              placeholder="Enter your email"
               name="email"
+              value={values.email}
               onChange={handleInput}
-              className="form-control rounded-0"
+              className="form-input w-full rounded-md"
             />
           </div>
-          <div className="mb-3">
-            <label htmlFor="password">
-              <strong>Password</strong>
+          <div className="mb-4">
+            <label
+              htmlFor="password"
+              className="block text-gray-700 font-bold mb-2"
+            >
+              Password
             </label>
             <input
               type="password"
-              placeholder="Enter the Password"
+              placeholder="Enter your password"
               name="password"
+              value={values.password}
               onChange={handleInput}
-              className="form-control rounded-0"
+              className="form-input w-full rounded-md"
             />
           </div>
           {errorMessage && (
-            <div className="alert alert-danger" role="alert">
-              {errorMessage}
-            </div>
+            <div className="text-red-500 text-sm mb-4">{errorMessage}</div>
           )}
-          <button type="submit" className="btn btn-success w-100 rounded-0">
-            <strong>Login</strong>
-          </button>
-          <p>You agree to our Terms and Policies</p>
-          <Link
-            to="/signup"
-            className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none"
+          <button
+            type="submit"
+            className={`bg-blue-500 text-white w-full py-2 rounded-md focus:outline-none focus:bg-blue-600 ${
+              isLoading ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-600"
+            }`}
+            disabled={isLoading}
           >
-            <strong>Create Account</strong>
-          </Link>
+            {isLoading ? "Logging in..." : "Login"}
+          </button>
+          <p className="text-xs mt-2 text-center">
+            By signing in, you agree to our{" "}
+            <Link to="#" className="text-blue-500">
+              Terms
+            </Link>{" "}
+            and{" "}
+            <Link to="#" className="text-blue-500">
+              Privacy Policy
+            </Link>
+            .
+          </p>
+          <div className="text-center mt-4">
+            <Link to="/signup" className="text-blue-500 hover:underline">
+              Create an account
+            </Link>
+          </div>
         </form>
       </div>
     </div>
