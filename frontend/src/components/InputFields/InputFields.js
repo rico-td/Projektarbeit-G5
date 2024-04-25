@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { UilSearch, UilLocationPoint } from "@iconscout/react-unicons";
 import { TbMenu2 } from "react-icons/tb";
 import { MdOutlineLogin } from "react-icons/md";
@@ -62,10 +63,12 @@ const InputFields = ({ onSearchChange }) => {
           </button>
         </div>
       </div>
-      <MdOutlineLogin
-        size={35}
-        className="text-white cursor-pointer transition ease-out hover:scale-125 mx-1"
-      />
+      <Link to="/Login">
+        <MdOutlineLogin
+          size={35}
+          className="text-white cursor-pointer transition ease-out hover:scale-125 mx-1"
+        />
+      </Link>
     </div>
   );
 };

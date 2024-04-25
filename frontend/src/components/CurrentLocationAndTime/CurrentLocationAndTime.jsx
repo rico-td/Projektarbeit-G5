@@ -32,13 +32,13 @@ function CurrentLocationAndTime({ cityName }) {
   };
 
   return (
-    <div className="text-white flex flex-col justify-center items-center my-[35px] cursor-default">
+    <div className="flex flex-col justify-center items-center my-[35px] cursor-default bg-white bg-opacity-[0.3] p-3 rounded-xl">
       <div>
-        <p className="text-white text-2xl">{cityName}</p>
+        <p className="text-2xl">{cityName}</p>
       </div>
 
       <div>
-        <p className="text-white text-[20px] font-extralight">
+        <p className="text-xl font-extralight">
           {currentTime.toLocaleTimeString("en-US", options)}
         </p>
       </div>

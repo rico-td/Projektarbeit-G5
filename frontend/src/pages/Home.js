@@ -5,12 +5,12 @@ import { useState, useEffect } from "react";
 import style from "./Home.module.css";
 
 // image
-import bgImage from "../assets/img/bg2.jpg";
+import bgImg from "../assets/img/bg.jpg";
 
 // components
 import InputFields from "../components/InputFields/InputFields.js";
 import CurrentLocationAndTime from "../components/CurrentLocationAndTime/CurrentLocationAndTime.jsx";
-import DailyForecast from "../components/Forecast/DailyForecast/DailyForecast.jsx";
+import HourlyForecast from "../components/Forecast/HourlyForecast/HourlyForecast.jsx";
 
 // fetching data
 import { fetchCurrentDay } from "../api/queries.js";
@@ -20,16 +20,19 @@ import { fetchCurrentDay } from "../api/queries.js";
 function Home() {
   const [city, setCity] = useState("Berlin");
   const [forecastData, setForecastData] = useState(null);
+  const [latitude, setLatitude] = useState("52.5244");
+  const [longitude, setLongitude] = useState("13.4105");
   const [isLoading, setIsLoading] = useState(false);
 
   // fetching the data for current day
-  async function fetchCityAndTime() {
+  async function fetchForecastHourly() {
     setIsLoading(true);
     try {
       const jsonResponse = await fetchCurrentDay(city);
-      console.log("RECEIVED FROM Home.js:", jsonResponse);
 
       setForecastData(jsonResponse);
+      setLatitude(jsonResponse.latitudeCoordinateResponse);
+      setLongitude(jsonResponse.longitudeCoordinateResponse);
     } catch (e) {
       console.log("Error", e);
     } finally {
@@ -40,23 +43,25 @@ function Home() {
   useEffect(() => {
     // Führe fetchCityAndTime nur aus, wenn city nicht leer ist
     if (city) {
-      fetchCityAndTime(city);
+      fetchForecastHourly(city);
     }
   }, [city]);
 
   useEffect(() => {
     // Überprüfe, ob die Daten geladen sind, bevor sie ausgegeben werden
     if (!isLoading) {
-      console.log("ForecastData:", forecastData);
+      console.log("DATA CURRENT DAY FROM Home.js:", forecastData);
+      console.log("LATITUDE FROM Home.js:", latitude);
+      console.log("LONGITUDE FROM Home.js:", longitude);
     }
-  }, [isLoading, forecastData]);
+  }, [isLoading, forecastData, latitude, longitude]);
 
   const handleSearchChange = async (cityName) => {
     setCity(cityName);
   };
 
   // to update just the img in the component and not the whole component, more efficient
-  const [bg] = useState(bgImage);
+  const [bg] = useState(bgImg);
 
   return (
     <div
@@ -70,7 +75,11 @@ function Home() {
           localTime={forecastData?.cityNameResponse}
         />
       )}
-      <DailyForecast data={forecastData?.forecasts} />
+      <HourlyForecast
+        data={forecastData?.forecasts}
+        sunrise={forecastData?.sunrise}
+        sunset={forecastData?.sunset}
+      />
     </div>
   );
 }

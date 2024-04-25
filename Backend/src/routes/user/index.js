@@ -42,8 +42,10 @@ async function addUserData() {
   try {
     for (let userData of user) {
       // Check if user already exists
-      const existingUser = await UserModel.findOne({ where: { id: userData.id } });
-      
+      const existingUser = await UserModel.findOne({
+        where: { id: userData.id },
+      });
+
       // If user doesn't exist, create new user
       if (!existingUser) {
         await UserModel.create(userData);
@@ -83,20 +85,18 @@ UserRouter.get("/id", (req, res) => {
 });
 
 //VALIDATE USER
-UserRouter.post("/validateuser", async (req, res) => {
-  const { username, password } = req.body;
-  if (!username || !password) {
+UserRouter.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
     res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
     return;
   }
 
   try {
-    const user = await UserModel.findOne({ where: { username } });
+    const user = await UserModel.findOne({ where: { email } });
     //bcrypt.compareSync is used to compare the entered password with the stored hashed password.
     if (user && bcrypt.compareSync(password, user.password)) {
-      res
-        .status(StatusCodes.OK)
-        .json({ message: "User validated successfully " });
+      res.status(StatusCodes.OK).json({ user });
     } else {
       res.status(StatusCodes.UNAUTHORIZED).send(ReasonPhrases.UNAUTHORIZED);
     }
@@ -107,7 +107,7 @@ UserRouter.post("/validateuser", async (req, res) => {
 
 //    CREATE USER
 
-UserRouter.post("/createuser", async (req, res) => {
+UserRouter.post("/signup", async (req, res) => {
   const { username, password, email } = req.body;
 
   if (!username || !password || !email) {
@@ -124,7 +124,9 @@ UserRouter.post("/createuser", async (req, res) => {
 
   // Check if the username starts with a number
   if (!isNaN(username[0])) {
-    res.status(StatusCodes.BAD_REQUEST).send("Username should not start with a number");
+    res
+      .status(StatusCodes.BAD_REQUEST)
+      .send("Username should not start with a number");
     return;
   }
 
@@ -151,7 +153,6 @@ UserRouter.post("/createuser", async (req, res) => {
     console.log("Error occured creating user", e);
   }
 });
-
 
 // //  ***DELETE USER***
 UserRouter.delete("/delete", async (req, res) => {
