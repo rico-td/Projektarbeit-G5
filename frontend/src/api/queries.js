@@ -10,4 +10,26 @@ async function fetchCurrentDay(cityName) {
   return forecastToday;
 }
 
-export { fetchCurrentDay };
+// subsequent temperature for every 3 hours for 5 days
+async function fetchCurrentDayHourlyData(latitude, longitude) {
+  const result = await api.get("/api/getweather/currentdayhourly", {
+    params: { latitude, longitude },
+  });
+
+  const forecastCurrentDayHourly = result.data.responseData;
+  console.log("RECEIVED DATA FOR CurrentDayHourly: ", forecastCurrentDayHourly);
+  return forecastCurrentDayHourly;
+}
+
+// for 7 days
+async function fetchUpcomingDays(latitude, longitude) {
+  const result = await api.get("/api/getweather/upcomingdays", {
+    params: { latitude, longitude },
+  });
+
+  const forecastUpcomingDays = result.data.responseData;
+  console.log("RECEIVED DATA FOR UPCOMING DAYS: ", forecastUpcomingDays);
+  return forecastUpcomingDays;
+}
+
+export { fetchCurrentDay, fetchCurrentDayHourlyData, fetchUpcomingDays };

@@ -5,31 +5,49 @@ import { useState, useEffect } from "react";
 import style from "./Home.module.css";
 
 // image
-import bgImage from "../assets/img/bg2.jpg";
+import bgImg from "../assets/img/bg.jpg";
 
 // components
 import InputFields from "../components/InputFields/InputFields.js";
 import CurrentLocationAndTime from "../components/CurrentLocationAndTime/CurrentLocationAndTime.jsx";
+import HourlyForecast from "../components/Forecast/HourlyForecast/HourlyForecast.jsx";
 import DailyForecast from "../components/Forecast/DailyForecast/DailyForecast.jsx";
 
 // fetching data
-import { fetchCurrentDay } from "../api/queries.js";
+import { fetchCurrentDay, fetchUpcomingDays } from "../api/queries.js";
 
 // --------------------------------------------------------------------
 
 function Home() {
-  const [city, setCity] = useState("Berlin");
-  const [forecastData, setForecastData] = useState(null);
+  const [city, setCity] = useState("Paris");
+  const [DataHourly, setDataHourly] = useState(null);
+  const [DataDaily, setDataDaily] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isCelsius, setIsCelsius] = useState(true);
 
   // fetching the data for current day
-  async function fetchCityAndTime() {
+  async function fetchForecastHourly() {
     setIsLoading(true);
     try {
-      const jsonResponse = await fetchCurrentDay(city);
-      console.log("RECEIVED FROM Home.js:", jsonResponse);
+      const jsonHourly = await fetchCurrentDay(city);
+      const lat = jsonHourly.latitudeCoordinateResponse;
+      const lon = jsonHourly.longitudeCoordinateResponse;
+      setDataHourly(jsonHourly);
 
-      setForecastData(jsonResponse);
+      await fetchForecastDaily(lat, lon);
+    } catch (e) {
+      console.log("Error", e);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  // fetching data upcoming days
+  async function fetchForecastDaily(lat, lon) {
+    setIsLoading(true);
+    try {
+      const jsonDaily = await fetchUpcomingDays(lat, lon);
+      setDataDaily(jsonDaily);
     } catch (e) {
       console.log("Error", e);
     } finally {
@@ -38,39 +56,58 @@ function Home() {
   }
 
   useEffect(() => {
-    // Führe fetchCityAndTime nur aus, wenn city nicht leer ist
+    // Führe fetchForecastHourly nur aus, wenn city nicht leer ist
     if (city) {
-      fetchCityAndTime(city);
+      fetchForecastHourly();
     }
   }, [city]);
-
-  useEffect(() => {
-    // Überprüfe, ob die Daten geladen sind, bevor sie ausgegeben werden
-    if (!isLoading) {
-      console.log("ForecastData:", forecastData);
-    }
-  }, [isLoading, forecastData]);
 
   const handleSearchChange = async (cityName) => {
     setCity(cityName);
   };
 
-  // to update just the img in the component and not the whole component, more efficient
-  const [bg] = useState(bgImage);
+  // to update just the img in the component and not the whole component
+  const [bg] = useState(bgImg);
+
+  const handleUnitsChange = (newValue) => {
+    setIsCelsius(newValue);
+  };
 
   return (
     <div
       className="flex flex-col items-center px-[20px] mx-auto w-[100vw] h-[100vh]"
       style={{ backgroundImage: `url(${bg})` }}
     >
-      <InputFields onSearchChange={handleSearchChange} />
-      {forecastData && !isLoading && (
-        <CurrentLocationAndTime
-          cityName={forecastData?.cityNameResponse}
-          localTime={forecastData?.cityNameResponse}
+      <div className="flex-col justify-start">
+        <InputFields
+          isCelcius={isCelsius}
+          onUnitsChange={handleUnitsChange}
+          onSearchChange={handleSearchChange}
         />
-      )}
-      <DailyForecast data={forecastData?.forecasts} />
+
+        {DataHourly && !isLoading && (
+          <div className="">
+            <CurrentLocationAndTime
+              cityName={DataHourly?.cityNameResponse}
+              localTime={DataHourly?.cityNameResponse}
+              sunrise={DataHourly?.sunrise}
+              sunset={DataHourly?.sunset}
+            />
+          </div>
+        )}
+
+        <HourlyForecast
+          isCelsius={isCelsius}
+          dataHourly={DataHourly?.forecasts}
+        />
+
+        <DailyForecast
+          isCelsius={isCelsius}
+          dataDaily={DataDaily?.forecasts}
+          sunrise={DataDaily?.forecasts}
+          sunset={DataDaily?.forecasts}
+        />
+      </div>
     </div>
   );
 }

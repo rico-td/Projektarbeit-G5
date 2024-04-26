@@ -6,71 +6,7 @@ const { where } = require("sequelize");
 const bcrypt = require("bcrypt");
 const saltRounds = 10; // determines the complexity of the hash,higher the number more complex
 
-// Simulated database for user
-let user = [
-  {
-    id: 1,
-    username: "Alan",
-    password: bcrypt.hashSync("123456", saltRounds), //bcrypt.hashSync is used to hash the password
-    email: "alan@mail.com",
-  },
-  {
-    id: 2,
-    username: "Adam",
-    password: bcrypt.hashSync("123456", saltRounds),
-    email: "adam@mail.com",
-  },
-  {
-    id: 3,
-    username: "John",
-    password: bcrypt.hashSync("123456", saltRounds),
-    email: "john@mail.com",
-  },
-  {
-    id: 4,
-    username: "Kyle",
-    password: bcrypt.hashSync("123456", saltRounds),
-    email: "kyle@mail.com",
-  },
-];
-
-console.log(user);
 const UserRouter = Router();
-
-// add the data into sql workbench
-async function addUserData() {
-  try {
-    for (let userData of user) {
-      // Check if user already exists
-      const existingUser = await UserModel.findOne({
-        where: { id: userData.id },
-      });
-
-      // If user doesn't exist, create new user
-      if (!existingUser) {
-        await UserModel.create(userData);
-      }
-    }
-  } catch (error) {
-    console.log("error occured during add data", error);
-  }
-}
-
-addUserData();
-
-// Define a GET route handler to get all data
-UserRouter.get("/all", async (req, res) => {
-  try {
-    // Call the asynchronous function to fetch data from the database
-    const User = await UserModel.findAll();
-    // Send the fetched data as a JSON response
-    res.json(User);
-  } catch (error) {
-    // Handle errors
-    console.error("Error fetching data:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
 
 //  ***GET REQUESTS***
 // // Return a specific user

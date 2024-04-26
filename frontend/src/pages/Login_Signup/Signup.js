@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signupUser } from "../../api/userQueries";
+import bg from "../../assets/img/bg.jpg";
 
 function Signup() {
   const [name, setName] = useState("");
@@ -35,6 +36,7 @@ function Signup() {
   };
 
   return (
+
     <div className="min-h-screen bg-gradient-to-r from-pink-400 to-purple-500 flex justify-center items-center">
       <div className="bg-white shadow-md rounded p-8 max-w-md w-full">
         <h2 className="text-2xl mb-4 text-center font-bold">Sign Up</h2>
@@ -54,6 +56,7 @@ function Signup() {
               onChange={handleInput}
               className="form-input w-full rounded-md"
             />
+
           </div>
           <div className="mb-4">
             <label

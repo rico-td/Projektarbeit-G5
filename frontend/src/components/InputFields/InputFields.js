@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { UilSearch, UilLocationPoint } from "@iconscout/react-unicons";
 import { TbMenu2 } from "react-icons/tb";
 import { MdOutlineLogin } from "react-icons/md";
 
-const InputFields = ({ onSearchChange }) => {
+function InputFields({ onSearchChange, isCelcius, onUnitsChange }) {
   const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = (e) => {
@@ -20,8 +21,13 @@ const InputFields = ({ onSearchChange }) => {
     }
   };
 
+  const handleUnitsChange = () => {
+    const newValue = !isCelcius;
+    onUnitsChange(newValue); // Rufe die übergebene Funktion mit dem neuen Wert auf
+  };
+
   return (
-    <div className="flex justify-between p-5 w-[100%] border-b-2 border-white border-opacity-50 py-8">
+    <div className="flex justify-between w-[100%] border-b-2 border-white border-opacity-50 py-4">
       <TbMenu2
         size={35}
         className="text-white cursor-pointer transition ease-out hover:scale-125 mx-1"
@@ -29,7 +35,7 @@ const InputFields = ({ onSearchChange }) => {
 
       <div className="flex justify-center items-center">
         <input
-          className="text-l font-light p-1.5 shadow-xl focus:outline-none capitalize placeholder:lowercase rounded-3xl text-center align-middle"
+          className="text-l font-light p-1.5 mr-5 shadow-xl focus:outline-none capitalize placeholder:lowercase rounded-2xl text-center"
           type="search"
           placeholder="search for city..."
           value={inputValue}
@@ -50,6 +56,11 @@ const InputFields = ({ onSearchChange }) => {
           <button
             name="metric"
             className="text-white cursor-pointer mx-1 text-l hover:scale-125 font-semibold"
+            onClick={() => {
+              if (!isCelcius) {
+                handleUnitsChange();
+              }
+            }}
           >
             °C
           </button>
@@ -57,17 +68,24 @@ const InputFields = ({ onSearchChange }) => {
           <button
             name="imperial"
             className="text-white cursor-pointer mx-1 text-l hover:scale-125 font-semibold"
+            onClick={() => {
+              if (isCelcius) {
+                handleUnitsChange();
+              }
+            }}
           >
             °F
           </button>
         </div>
       </div>
-      <MdOutlineLogin
-        size={35}
-        className="text-white cursor-pointer transition ease-out hover:scale-125 mx-1"
-      />
+      <Link to="/Login">
+        <MdOutlineLogin
+          size={35}
+          className="text-white cursor-pointer transition ease-out hover:scale-125 mx-1"
+        />
+      </Link>
     </div>
   );
-};
+}
 
 export default InputFields;
