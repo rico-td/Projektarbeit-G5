@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import style from "./Home.module.css";
 
 // image
+import bgImg from "../assets/img/bg.jpg";
 
 // components
 import InputFields from "../components/InputFields/InputFields.js";
@@ -66,13 +67,17 @@ function Home() {
   };
 
   // to update just the img in the component and not the whole component
+  const [bg] = useState(bgImg);
 
   const handleUnitsChange = (newValue) => {
     setIsCelsius(newValue);
   };
 
   return (
-    <div className="flex flex-col items-center px-[20px] mx-auto w-[100vw] h-[100vh]">
+    <div
+      className="flex flex-col items-center px-[20px] mx-auto w-[100vw] h-[100vh]"
+      style={{ backgroundImage: `url(${bg})` }}
+    >
       <div className="flex-col justify-start">
         <InputFields
           isCelcius={isCelsius}

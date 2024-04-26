@@ -9,7 +9,6 @@ import { TiWeatherCloudy } from "react-icons/ti";
 import { FaTemperatureHigh, FaTemperatureLow } from "react-icons/fa";
 
 import img from "../../assets/ForecastDay/flipImg.jpg";
-// import img from "../../assets/img/fc.jpg";
 
 function FlipCard({
   temperature,
@@ -56,7 +55,6 @@ function FlipCard({
         className={`${style.card}`}
         style={{
           backgroundImage: `url(${img}) `,
-          backgroundSize: "cover",
           opacity: "0.8",
         }}
         onClick={handleFlip}
