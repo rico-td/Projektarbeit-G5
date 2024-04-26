@@ -17,7 +17,10 @@ async function fetchCurrentDayHourlyData(latitude, longitude) {
   });
 
   const forecastCurrentDayHourly = result.data.responseData;
-  console.log("RECEIVED DATA FOR CurrentDayHourly: ", forecastCurrentDayHourly);
+  console.log(
+    "RECEIVED DATA FOR CURRENT DAY 3-HOURLY: ",
+    forecastCurrentDayHourly
+  );
   return forecastCurrentDayHourly;
 }
 

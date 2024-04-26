@@ -18,61 +18,65 @@ import { fetchCurrentDay, fetchUpcomingDays } from "../api/queries.js";
 
 // --------------------------------------------------------------------
 
-function Home() {
-  const [city, setCity] = useState("Paris");
+const Home = () => {
+  // states
+  const [city, setCity] = useState("Tokyo");
   const [DataHourly, setDataHourly] = useState(null);
   const [DataDaily, setDataDaily] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isCelsius, setIsCelsius] = useState(true);
+  const [lat, setLat] = useState(null);
+  const [lon, setLon] = useState(null);
 
-  // fetching the data for current day
-  async function fetchForecastHourly() {
-    setIsLoading(true);
-    try {
-      const jsonHourly = await fetchCurrentDay(city);
-      const lat = jsonHourly.latitudeCoordinateResponse;
-      const lon = jsonHourly.longitudeCoordinateResponse;
-      setDataHourly(jsonHourly);
-
-      await fetchForecastDaily(lat, lon);
-    } catch (e) {
-      console.log("Error", e);
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  // fetching data upcoming days
-  async function fetchForecastDaily(lat, lon) {
-    setIsLoading(true);
-    try {
-      const jsonDaily = await fetchUpcomingDays(lat, lon);
-      setDataDaily(jsonDaily);
-    } catch (e) {
-      console.log("Error", e);
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
+  // fetching data
   useEffect(() => {
-    // Führe fetchForecastHourly nur aus, wenn city nicht leer ist
+    async function fetchForecastHourly() {
+      try {
+        const jsonHourly = await fetchCurrentDay(city);
+        const latitude = jsonHourly.latitudeCoordinateResponse;
+        const longitude = jsonHourly.longitudeCoordinateResponse;
+        setLat(latitude);
+        setLon(longitude);
+        setDataHourly(jsonHourly);
+
+        await fetchForecastDaily(lat, lon);
+      } catch (e) {
+        console.log("Error");
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    async function fetchForecastDaily(lat, lon) {
+      try {
+        const jsonDaily = await fetchUpcomingDays(lat, lon);
+        setDataDaily(jsonDaily);
+      } catch (e) {
+        console.log("fetching Error in Home.js:");
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
     if (city) {
       fetchForecastHourly();
+      fetchForecastDaily();
     }
   }, [city]);
 
+  // handlers
   const handleSearchChange = async (cityName) => {
     setCity(cityName);
   };
 
-  // to update just the img in the component and not the whole component
+  // update bg img
   const [bg] = useState(bgImg);
 
   const handleUnitsChange = (newValue) => {
     setIsCelsius(newValue);
   };
 
+  // rendering
   return (
     <div
       className="flex flex-col items-center px-[20px] mx-auto w-[100vw] h-[100vh]"
@@ -110,6 +114,6 @@ function Home() {
       </div>
     </div>
   );
-}
+};
 
 export default Home;
