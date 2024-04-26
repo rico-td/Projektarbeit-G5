@@ -199,11 +199,11 @@ function interpretWeatherCode(weatherCode) {
     case 86:
       return "Snow showers heavy";
     case 95:
-      return "Thunderstorm: Slight or moderate";
+      return "Thunderstorm";
     case 96:
-      return "Thunderstorm with slight hail";
+      return "Thunderstorm slight hail";
     case 99:
-      return "Thunderstorm with heavy hail";
+      return "Thunderstorm heavy hail";
     default:
       return "Unknown";
   }

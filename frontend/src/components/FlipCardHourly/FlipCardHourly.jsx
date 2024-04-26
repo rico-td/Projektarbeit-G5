@@ -55,11 +55,11 @@ function FlipCard({
         className={`${style.card}`}
         style={{
           backgroundImage: `url(${img}) `,
-          opacity: "0.8",
+          opacity: "0.85",
         }}
         onClick={handleFlip}
       >
-        <div className="flex flex-col justify-center items-center">
+        <div className="h-[100%] flex flex-col justify-around items-center">
           <p className="font-extralight text-xl">{`${time12}`}</p>
           <div className="flex flex-col justify-center items-center">
             <div className="flex flex-col justify-center items-center my-5">
