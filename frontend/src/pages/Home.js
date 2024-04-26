@@ -9,6 +9,7 @@ import DailyForecast from "../components/Forecast/DailyForecast/DailyForecast.js
 
 // fetching data
 import { fetchCurrentDay, fetchUpcomingDays } from "../api/queries.js";
+import { FaPoundSign } from "react-icons/fa";
 
 // --------------------------------------------------------------------
 
@@ -27,15 +28,14 @@ const Home = () => {
     async function fetchForecastHourly() {
       try {
         const jsonHourly = await fetchCurrentDay(city);
-        const latitude = jsonHourly.latitudeCoordinateResponse;
-        const longitude = jsonHourly.longitudeCoordinateResponse;
-        setLat(latitude);
-        setLon(longitude);
+
+        setLat(jsonHourly.latitudeCoordinateResponse);
+        setLon(jsonHourly.longitudeCoordinateResponse);
         setDataHourly(jsonHourly);
 
         await fetchForecastDaily(lat, lon);
       } catch (e) {
-        console.log("Error");
+        console.log(e);
       } finally {
         setIsLoading(false);
       }
@@ -46,7 +46,7 @@ const Home = () => {
         const jsonDaily = await fetchUpcomingDays(lat, lon);
         setDataDaily(jsonDaily);
       } catch (e) {
-        console.log("fetching Error in Home.js:");
+        console.log(e);
       } finally {
         setIsLoading(false);
       }
@@ -54,9 +54,9 @@ const Home = () => {
 
     if (city) {
       fetchForecastHourly();
-      fetchForecastDaily();
+      fetchForecastDaily(lat, lon);
     }
-  }, [city]);
+  }, [city, lat, lon]);
 
   // handlers
   const handleSearchChange = async (cityName) => {
@@ -75,6 +75,8 @@ const Home = () => {
           isCelcius={isCelsius}
           onUnitsChange={handleUnitsChange}
           onSearchChange={handleSearchChange}
+          setLat={setLat}
+          setLon={setLon}
         />
 
         {DataHourly && !isLoading && (

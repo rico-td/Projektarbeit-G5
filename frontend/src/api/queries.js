@@ -6,7 +6,7 @@ async function fetchCurrentDay(cityName) {
   });
 
   const forecastToday = result.data.responseData;
-  console.log("RECEIVED FROM queries.js: ", forecastToday);
+  // console.log("RECEIVED FROM queries.js: ", forecastToday);
   return forecastToday;
 }
 
@@ -17,10 +17,10 @@ async function fetchCurrentDayHourlyData(latitude, longitude) {
   });
 
   const forecastCurrentDayHourly = result.data.responseData;
-  console.log(
-    "RECEIVED DATA FOR CURRENT DAY 3-HOURLY: ",
-    forecastCurrentDayHourly
-  );
+  // console.log(
+  //   "RECEIVED DATA FOR CURRENT DAY 3-HOURLY: ",
+  //   forecastCurrentDayHourly
+  // );
   return forecastCurrentDayHourly;
 }
 
@@ -31,7 +31,7 @@ async function fetchUpcomingDays(latitude, longitude) {
   });
 
   const forecastUpcomingDays = result.data.responseData;
-  console.log("RECEIVED DATA FOR UPCOMING DAYS: ", forecastUpcomingDays);
+  // console.log("RECEIVED DATA FOR UPCOMING DAYS: ", forecastUpcomingDays);
   return forecastUpcomingDays;
 }
 

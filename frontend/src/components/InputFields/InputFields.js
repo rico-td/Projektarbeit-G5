@@ -4,7 +4,13 @@ import { UilSearch, UilLocationPoint } from "@iconscout/react-unicons";
 import { TbMenu2 } from "react-icons/tb";
 import { MdOutlineLogin } from "react-icons/md";
 
-function InputFields({ onSearchChange, isCelcius, onUnitsChange }) {
+function InputFields({
+  onSearchChange,
+  isCelcius,
+  onUnitsChange,
+  setLat,
+  setLon,
+}) {
   const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = (e) => {
@@ -24,6 +30,18 @@ function InputFields({ onSearchChange, isCelcius, onUnitsChange }) {
   const handleUnitsChange = () => {
     const newValue = !isCelcius;
     onUnitsChange(newValue); // Rufe die übergebene Funktion mit dem neuen Wert auf
+  };
+
+  const onLocationClick = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const { latitude, longitude } = position.coords;
+        console.log(latitude);
+        console.log(longitude);
+        setLat(latitude);
+        setLon(longitude);
+      });
+    }
   };
 
   return (
@@ -51,6 +69,7 @@ function InputFields({ onSearchChange, isCelcius, onUnitsChange }) {
           <UilLocationPoint
             size={25}
             className="text-white cursor-pointer transition ease-out hover:scale-125 mx-1"
+            onClick={onLocationClick}
           />
 
           <button
