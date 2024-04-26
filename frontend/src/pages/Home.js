@@ -19,12 +19,11 @@ import { fetchCurrentDay, fetchUpcomingDays } from "../api/queries.js";
 // --------------------------------------------------------------------
 
 function Home() {
-  const [city, setCity] = useState("Berlin");
+  const [city, setCity] = useState("Paris");
   const [DataHourly, setDataHourly] = useState(null);
   const [DataDaily, setDataDaily] = useState(null);
-  const [latitude, setLatitude] = useState("52.5244");
-  const [longitude, setLongitude] = useState("13.4105");
   const [isLoading, setIsLoading] = useState(false);
+  const [isCelsius, setIsCelsius] = useState(true);
 
   // fetching the data for current day
   async function fetchForecastHourly() {
@@ -33,9 +32,8 @@ function Home() {
       const jsonHourly = await fetchCurrentDay(city);
       const lat = jsonHourly.latitudeCoordinateResponse;
       const lon = jsonHourly.longitudeCoordinateResponse;
-      setLatitude(lat);
-      setLongitude(lon);
       setDataHourly(jsonHourly);
+
       await fetchForecastDaily(lat, lon);
     } catch (e) {
       console.log("Error", e);
@@ -49,7 +47,6 @@ function Home() {
     setIsLoading(true);
     try {
       const jsonDaily = await fetchUpcomingDays(lat, lon);
-
       setDataDaily(jsonDaily);
     } catch (e) {
       console.log("Error", e);
@@ -69,29 +66,48 @@ function Home() {
     setCity(cityName);
   };
 
-  // to update just the img in the component and not the whole component, more efficient
+  // to update just the img in the component and not the whole component
   const [bg] = useState(bgImg);
+
+  const handleUnitsChange = (newValue) => {
+    setIsCelsius(newValue);
+  };
 
   return (
     <div
       className="flex flex-col items-center px-[20px] mx-auto w-[100vw] h-[100vh]"
       style={{ backgroundImage: `url(${bg})` }}
     >
-      <InputFields onSearchChange={handleSearchChange} />
-      {DataHourly && !isLoading && (
-        <CurrentLocationAndTime
-          cityName={DataHourly?.cityNameResponse}
-          localTime={DataHourly?.cityNameResponse}
+      <div className="flex-col justify-start">
+        <InputFields
+          isCelcius={isCelsius}
+          onUnitsChange={handleUnitsChange}
+          onSearchChange={handleSearchChange}
         />
-      )}
 
-      <HourlyForecast
-        data={DataHourly?.forecasts}
-        sunrise={DataHourly?.sunrise}
-        sunset={DataHourly?.sunset}
-      />
+        {DataHourly && !isLoading && (
+          <div className="">
+            <CurrentLocationAndTime
+              cityName={DataHourly?.cityNameResponse}
+              localTime={DataHourly?.cityNameResponse}
+              sunrise={DataHourly?.sunrise}
+              sunset={DataHourly?.sunset}
+            />
+          </div>
+        )}
 
-      <DailyForecast data={DataDaily?.forecasts} />
+        <HourlyForecast
+          isCelsius={isCelsius}
+          dataHourly={DataHourly?.forecasts}
+        />
+
+        <DailyForecast
+          isCelsius={isCelsius}
+          dataDaily={DataDaily?.forecasts}
+          sunrise={DataDaily?.forecasts}
+          sunset={DataDaily?.forecasts}
+        />
+      </div>
     </div>
   );
 }

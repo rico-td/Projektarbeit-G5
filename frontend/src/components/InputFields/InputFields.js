@@ -4,7 +4,7 @@ import { UilSearch, UilLocationPoint } from "@iconscout/react-unicons";
 import { TbMenu2 } from "react-icons/tb";
 import { MdOutlineLogin } from "react-icons/md";
 
-const InputFields = ({ onSearchChange }) => {
+function InputFields({ onSearchChange, isCelcius, onUnitsChange }) {
   const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = (e) => {
@@ -19,6 +19,11 @@ const InputFields = ({ onSearchChange }) => {
     if (e.key === "Enter") {
       handleSearchClick();
     }
+  };
+
+  const handleUnitsChange = () => {
+    const newValue = !isCelcius;
+    onUnitsChange(newValue); // Rufe die übergebene Funktion mit dem neuen Wert auf
   };
 
   return (
@@ -51,6 +56,11 @@ const InputFields = ({ onSearchChange }) => {
           <button
             name="metric"
             className="text-white cursor-pointer mx-1 text-l hover:scale-125 font-semibold"
+            onClick={() => {
+              if (!isCelcius) {
+                handleUnitsChange();
+              }
+            }}
           >
             °C
           </button>
@@ -58,6 +68,11 @@ const InputFields = ({ onSearchChange }) => {
           <button
             name="imperial"
             className="text-white cursor-pointer mx-1 text-l hover:scale-125 font-semibold"
+            onClick={() => {
+              if (isCelcius) {
+                handleUnitsChange();
+              }
+            }}
           >
             °F
           </button>
@@ -71,6 +86,6 @@ const InputFields = ({ onSearchChange }) => {
       </Link>
     </div>
   );
-};
+}
 
 export default InputFields;

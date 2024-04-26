@@ -18,6 +18,9 @@ function FlipCard({
   temp_min,
   temp_max,
   date,
+  sunrise,
+  sunset,
+  isCelsius,
 }) {
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -29,14 +32,17 @@ function FlipCard({
     <ReactCardFlip flipDirection="horizontal" isFlipped={isFlipped}>
       <div
         className={`${style.card}`}
-        style={{ backgroundImage: `url(${img}) `, opacity: "0.7" }}
+        style={{ backgroundImage: `url(${img}) `, opacity: "0.8" }}
         onClick={handleFlip}
       >
         <div className="flex flex-col justify-center items-center">
-          <p className="font-semilight">{date}</p>
+          <p className="text-xl font-extralight">{date.slice(5)}</p>
           <div className="flex flex-col justify-center items-center">
             <div className="flex flex-col justify-center items-center my-5">
-              <p className="text-2xl">{`${temperature} °C`}</p>
+              <p className="text-4xl font-extralight">
+                {" "}
+                {`${temperature} ${isCelsius ? "°C" : "°F"}`}
+              </p>
               <div className="flex flex-col justify-center items-center">
                 <TiWeatherCloudy size="45" color="#ffffff" />
                 <p className="">{description}</p>
@@ -46,11 +52,16 @@ function FlipCard({
             <div className="flex justify-center items-center gap-3">
               <div className="flex justify-center items-center gap-1">
                 <FaTemperatureHigh size="20" color="#ffffff " />
-                <p className="text-l">{`${temp_max} °C`}</p>
+                <p className="text-l font-light">
+                  {" "}
+                  {`${temp_max} ${isCelsius ? "°C" : "°F"}`}
+                </p>
               </div>
               <div className="flex justify-center items-center gap-1">
                 <FaTemperatureLow size="20" color="#ffffff " />
-                <p className=" text-l">{`${temp_min} °C`}</p>
+                <p className=" text-l font-light">{`${temp_min} ${
+                  isCelsius ? "°C" : "°F"
+                }`}</p>
               </div>
             </div>
           </div>
@@ -64,17 +75,12 @@ function FlipCard({
       >
         <div className="flex flex-col justify-center items-center">
           <div>
-            <p>sunrise</p>
+            <p>sunrise at: {sunrise}</p>
           </div>
           <div>
-            <p>sunset</p>
+            <p>sunset at: {sunset}</p>
           </div>
           <div className="flex items-center justify-center gap-5 mt-1">
-            <div className="flex justify-center items-center">
-              <WiHumidity size="25" color="#ffffff" />
-              <p className="">{`${humidity} %`}</p>
-            </div>
-
             <div className="flex justify-center items-center gap-1">
               <FaWind size="15" color="#ffffff" />
               <p className="">{`${windSpeed} m/s`}</p>
