@@ -53,8 +53,7 @@ function Login() {
   };
 
   return (
-
-    <div className="flex justify-center items-center bg-gradient-to-r from-pink-400 to-purple-500 h-screen">
+    <div className="flex justify-center items-center bg-gradient-to-r h-screen">
       <div className="bg-white p-8 rounded-lg shadow-lg w-80">
         <h2 className="text-2xl mb-4 text-center font-bold">Login</h2>
         <form onSubmit={handleSubmit}>
@@ -64,7 +63,6 @@ function Login() {
               className="block text-gray-700 font-bold mb-2"
             >
               Email
-
             </label>
             <input
               type="email"

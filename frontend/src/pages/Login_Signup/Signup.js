@@ -36,8 +36,7 @@ function Signup() {
   };
 
   return (
-
-    <div className="min-h-screen bg-gradient-to-r from-pink-400 to-purple-500 flex justify-center items-center">
+    <div className="min-h-screen bg-gradient-to-r flex justify-center items-center">
       <div className="bg-white shadow-md rounded p-8 max-w-md w-full">
         <h2 className="text-2xl mb-4 text-center font-bold">Sign Up</h2>
         <form onSubmit={handleSubmit}>
@@ -56,7 +55,6 @@ function Signup() {
               onChange={handleInput}
               className="form-input w-full rounded-md"
             />
-
           </div>
           <div className="mb-4">
             <label

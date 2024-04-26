@@ -1,12 +1,6 @@
 // tools
 import { useState, useEffect } from "react";
 
-// style
-import style from "./Home.module.css";
-
-// image
-import bgImg from "../assets/img/bg.jpg";
-
 // components
 import InputFields from "../components/InputFields/InputFields.js";
 import CurrentLocationAndTime from "../components/CurrentLocationAndTime/CurrentLocationAndTime.jsx";
@@ -20,13 +14,13 @@ import { fetchCurrentDay, fetchUpcomingDays } from "../api/queries.js";
 
 const Home = () => {
   // states
-  const [city, setCity] = useState("Tokyo");
+  const [city, setCity] = useState("Paris");
   const [DataHourly, setDataHourly] = useState(null);
   const [DataDaily, setDataDaily] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isCelsius, setIsCelsius] = useState(true);
-  const [lat, setLat] = useState(null);
-  const [lon, setLon] = useState(null);
+  const [lat, setLat] = useState("48.8534");
+  const [lon, setLon] = useState("2.3488");
 
   // fetching data
   useEffect(() => {
@@ -69,19 +63,13 @@ const Home = () => {
     setCity(cityName);
   };
 
-  // update bg img
-  const [bg] = useState(bgImg);
-
   const handleUnitsChange = (newValue) => {
     setIsCelsius(newValue);
   };
 
   // rendering
   return (
-    <div
-      className="flex flex-col items-center px-[20px] mx-auto w-[100vw] h-[100vh]"
-      style={{ backgroundImage: `url(${bg})` }}
-    >
+    <div className="flex flex-col items-center px-[20px] mx-auto w-[100vw] h-[100vh]">
       <div className="flex-col justify-start">
         <InputFields
           isCelcius={isCelsius}
