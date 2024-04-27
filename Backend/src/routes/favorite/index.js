@@ -6,48 +6,8 @@ const FavoriteModel = require("../../database/models/FavModel");
 const { where } = require("sequelize");
 const UserModel = require("../../database/models/UserModel");
 
-// Simulated database for user
-let favorites_tb = [
-  {
-    id: 1,
-    location: "cologne",
-    userId: 1,
-  },
-  {
-    id: 2,
-    location: "Munich",
-    userId: 2,
-  },
-  {
-    id: 3,
-    location: "chennai",
-    userId: 1,
-  },
-];
-
-console.log(favorites_tb);
 const FavRouter = Router();
 
-// add the data into sql workbench
-async function addFavData() {
-  try {
-    for (let favData of favorites_tb) {
-      // Check if user already exists
-      const existingFav = await FavoriteModel.findOne({
-        where: { id: favData.id },
-      });
-
-      // If user doesn't exist, create new user
-      if (!existingFav) {
-        await FavoriteModel.create(favData);
-      }
-    }
-  } catch (error) {
-    console.log("error occured during add data", error);
-  }
-}
-
-addFavData();
 // Route to add a favorite for a user
 FavRouter.post("/favorites/add", async (req, res) => {
   const { userId, location } = req.body;
