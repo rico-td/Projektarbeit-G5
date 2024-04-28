@@ -1,50 +1,35 @@
 import React, { useState, useEffect } from "react";
 import logo from "../../assets/img/logo.png";
 
-function CurrentLocationAndTime({ cityName, sunrise, sunset }) {
-  // if (!cityName) return null;
-
-  const [currentTime, setCurrentTime] = useState(new Date());
-  const [currentDate, setCurrentDate] = useState(new Date());
-
-  useEffect(() => {
-    const dateInterval = setInterval(() => {
-      setCurrentDate(new Date());
-    }, 86400000); // update date every 24 hours
-
-    return () => {
-      clearInterval(dateInterval);
-    };
-  }, []); // just at first mount
-
-  const dateOptions = {
-    weekday: "short",
-    month: "long",
-    day: "numeric",
-    year: "numeric",
+function CurrentLocationAndTime({ cityName, localDateAndTime }) {
+  // convert time to "hh/mm AM/PM"
+  const convertTime = (dateTimeString) => {
+    const timeString = dateTimeString.split(" ")[1];
+    const date = new Date("2024-04-28 " + timeString); // Date-Objekt
+    const formattedTime = date.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    });
+    return formattedTime;
   };
 
-  const timeOptions = {
-    hour: "numeric",
-    minute: "numeric",
-    hour12: true,
+  // convert Date to "dd/Month/yyyy"
+  const convertDate = (dateTimeString) => {
+    const datePart = dateTimeString.split(" ")[0];
+    const date = new Date(datePart); // Date-Objekt
+    const formattedDate = date.toLocaleDateString("en-US", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    });
+    return formattedDate;
   };
-  function createDateObject(timeString) {
-    const today = new Date();
-    const isoString = `${today.toISOString().slice(0, 10)}T${timeString}`;
-    return new Date(isoString);
-  }
 
-  // Verwendung
-  const dateSunrise = createDateObject(sunrise);
-  const dateSunset = createDateObject(sunset);
-
-  // Zeitstrings erstellen
-  const sunriseTimeString = dateSunrise.toLocaleTimeString(
-    "en-US",
-    timeOptions
-  );
-  const sunsetTimeString = dateSunset.toLocaleTimeString("en-US", timeOptions);
+  //
+  const dateTimeString = localDateAndTime;
+  const time = convertTime(dateTimeString);
+  const date = convertDate(dateTimeString);
 
   return (
     <div className="flex flex-col w-[280px] mt-[25px] py-3 cursor-default bg-gray-500 bg-opacity-[0.4] rounded-xl">
@@ -53,24 +38,11 @@ function CurrentLocationAndTime({ cityName, sunrise, sunset }) {
         <div className="flex flex-col">
           <p className="text-white text-2xl font-light">{cityName}</p>
           <p className=" text-white text-l font-extralight">
-            {currentDate.toLocaleDateString("en-US", dateOptions)}
+            {date}
             <br />
-            {currentTime.toLocaleTimeString("en-US", timeOptions)}
+            local time: {time}
           </p>
         </div>
-      </div>
-
-      <div className="flex justify-evenly items-center mt-3">
-        <p className="text-white font-extralight text-xs">
-          sunrise: <br /> {sunriseTimeString}
-        </p>
-        <p
-          className="
-             text-white
-             font-extralight text-center text-xs"
-        >
-          sunset: <br /> {sunsetTimeString}
-        </p>
       </div>
     </div>
   );

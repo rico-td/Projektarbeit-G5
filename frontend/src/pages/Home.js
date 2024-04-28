@@ -1,5 +1,6 @@
 // tools
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 // components
 import InputFields from "../components/InputFields/InputFields.js";
@@ -8,8 +9,11 @@ import HourlyForecast from "../components/Forecast/HourlyForecast/HourlyForecast
 import DailyForecast from "../components/Forecast/DailyForecast/DailyForecast.jsx";
 
 // fetching data
-import { fetchCurrentDay, fetchUpcomingDays } from "../api/queries.js";
-import { FaPoundSign } from "react-icons/fa";
+import {
+  fetchCurrentDay,
+  fetchUpcomingDays,
+  fetchLocalTime,
+} from "../api/queries.js";
 
 // --------------------------------------------------------------------
 
@@ -18,6 +22,7 @@ const Home = () => {
   const [city, setCity] = useState("Paris");
   const [DataHourly, setDataHourly] = useState(null);
   const [DataDaily, setDataDaily] = useState(null);
+  const [DataTime, setDataTime] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isCelsius, setIsCelsius] = useState(true);
   const [lat, setLat] = useState("48.8534");
@@ -25,15 +30,15 @@ const Home = () => {
 
   // fetching data
   useEffect(() => {
-    async function fetchForecastHourly() {
+    // if (city.trim() !== "") {
+    setIsLoading(true);
+    async function GetHourlyForecast(city) {
       try {
         const jsonHourly = await fetchCurrentDay(city);
 
         setLat(jsonHourly.latitudeCoordinateResponse);
         setLon(jsonHourly.longitudeCoordinateResponse);
         setDataHourly(jsonHourly);
-
-        await fetchForecastDaily(lat, lon);
       } catch (e) {
         console.log(e);
       } finally {
@@ -41,7 +46,7 @@ const Home = () => {
       }
     }
 
-    async function fetchForecastDaily(lat, lon) {
+    async function GetDailyyForecast(lat, lon) {
       try {
         const jsonDaily = await fetchUpcomingDays(lat, lon);
         setDataDaily(jsonDaily);
@@ -51,10 +56,22 @@ const Home = () => {
         setIsLoading(false);
       }
     }
+    async function GetLocalTime(lat, lon) {
+      try {
+        const jsonTime = await fetchLocalTime(lat, lon);
+        setDataTime(jsonTime);
+        console.log("Local time:", DataTime);
+      } catch (e) {
+        console.log(e);
+      } finally {
+        setIsLoading(false);
+      }
+    }
 
     if (city) {
-      fetchForecastHourly();
-      fetchForecastDaily(lat, lon);
+      GetHourlyForecast(city);
+      GetDailyyForecast(lat, lon);
+      GetLocalTime(lat, lon);
     }
   }, [city, lat, lon]);
 
@@ -86,6 +103,7 @@ const Home = () => {
               localTime={DataHourly?.cityNameResponse}
               sunrise={DataHourly?.sunrise}
               sunset={DataHourly?.sunset}
+              localDateAndTime={DataTime}
             />
           </div>
         )}
