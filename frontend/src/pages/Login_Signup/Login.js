@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import bg from "../../assets/img/bg.jpg";
+import logo from "../../assets/img/logo.png";
 
 function Login() {
   const [values, setValues] = useState({
@@ -53,7 +53,13 @@ function Login() {
   };
 
   return (
-    <div className="flex justify-center items-center bg-gradient-to-r h-screen">
+    <div className="flex flex-col justify-start items-center bg-gradient-to-r h-screen gap-10 py-20">
+      <div className="flex flex-col justify-center items-center">
+        <Link to="/">
+          <img className="rotate-180" src={logo} alt="" width="80px" />
+        </Link>
+        <p className="font-light text-white">Home</p>
+      </div>
       <div className="bg-white p-8 rounded-lg shadow-lg w-80">
         <h2 className="text-2xl mb-4 text-center font-bold">Login</h2>
         <form onSubmit={handleSubmit}>
