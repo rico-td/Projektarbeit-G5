@@ -57,6 +57,7 @@ ApiRouter.get("/currentday", async (req, res) => {
       max_temperature_fahrenheit: celsiusToFahrenheit(item.main.temp_max),
       main_description: item.weather[0].main,
       description: item.weather[0].description,
+      weather_icon:item.weather[0].icon,
       wind_speed: item.wind.speed,
       humidity: item.main.humidity,
     }));
@@ -82,6 +83,7 @@ ApiRouter.get("/currentday", async (req, res) => {
         ),
         main_description: forecast.main_description,
         description: forecast.description,
+        weather_icon:forecast.weather_icon,
         wind_speed: forecast.wind_speed,
         humidity: forecast.humidity,
       })),
@@ -113,6 +115,7 @@ ApiRouter.get("/currentdayhourly", async (req, res) => {
         const minTemperatureCelsius = item.main.temp_min;
         const windSpeed = item.wind.speed;
         const weatherCondition = item.weather[0].description;
+        const weather_icon = item.weather[0].icon;
         const [date, time] = item.dt_txt.split(" ");
         const humidity = item.main.humidity;
 
@@ -131,6 +134,7 @@ ApiRouter.get("/currentdayhourly", async (req, res) => {
           ),
           wind_speed: windSpeed,
           description: weatherCondition,
+          weather_icon:weather_icon,
           humidity: humidity,
         };
       }),
