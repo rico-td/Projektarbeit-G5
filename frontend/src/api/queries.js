@@ -1,4 +1,5 @@
 import api from "./api.js";
+import axios from "axios";
 
 async function fetchCurrentDay(cityName) {
   const result = await api.get("/api/getweather/currentday", {
@@ -35,4 +36,27 @@ async function fetchUpcomingDays(latitude, longitude) {
   return forecastUpcomingDays;
 }
 
-export { fetchCurrentDay, fetchCurrentDayHourlyData, fetchUpcomingDays };
+//  local time
+async function fetchLocalTime(lat, lon) {
+  const result = await api.get(
+    "http://api.timezonedb.com/v2.1/get-time-zone?key=498D21BNZC76&format=json&by=position",
+    {
+      params: {
+        lat: lat,
+        lng: lon,
+      },
+    }
+  );
+
+  const localTime = result.data.formatted;
+
+  console.log("RECEIVED DATA FOR LOCAL TIME: ", localTime);
+  return localTime;
+}
+
+export {
+  fetchCurrentDay,
+  fetchCurrentDayHourlyData,
+  fetchUpcomingDays,
+  fetchLocalTime,
+};

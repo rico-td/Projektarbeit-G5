@@ -18,8 +18,6 @@ function FlipCard({
   temp_min,
   temp_max,
   date,
-  sunrise,
-  sunset,
   isCelsius,
 }) {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -48,22 +46,6 @@ function FlipCard({
                 <p className="">{description}</p>
               </div>
             </div>
-
-            <div className="flex justify-center items-center gap-3">
-              <div className="flex justify-center items-center gap-1">
-                <FaTemperatureHigh size="20" color="#ffffff " />
-                <p className="text-l font-light">
-                  {" "}
-                  {`${temp_max} ${isCelsius ? "°C" : "°F"}`}
-                </p>
-              </div>
-              <div className="flex justify-center items-center gap-1">
-                <FaTemperatureLow size="20" color="#ffffff " />
-                <p className=" text-l font-light">{`${temp_min} ${
-                  isCelsius ? "°C" : "°F"
-                }`}</p>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -73,20 +55,27 @@ function FlipCard({
         style={{ backgroundImage: `url(${img})`, opacity: "0.8" }}
         onClick={handleFlip}
       >
-        <div className="flex flex-col justify-center items-center">
-          <div>
-            <p>sunrise at: {sunrise}</p>
+        <div className="flex flex-col items-center justify-around h-[70%] gap-2">
+          <div className="flex justify-center items-center gap-1">
+            <FaWind size="15" color="#ffffff" />
+            <p className="">{`${windSpeed} m/s`}</p>
           </div>
-          <div>
-            <p>sunset at: {sunset}</p>
-          </div>
-          <div className="flex items-center justify-center gap-5 mt-1">
+          <div className="flex flex-col justify-center items-center gap-3">
             <div className="flex justify-center items-center gap-1">
-              <FaWind size="15" color="#ffffff" />
-              <p className="">{`${windSpeed} m/s`}</p>
+              <FaTemperatureHigh size="20" color="#ffffff " />
+              <p className="text-l font-light">
+                {`${temp_max} ${isCelsius ? "°C" : "°F"}`}
+              </p>
+            </div>
+            <div className="flex justify-center items-center gap-1">
+              <FaTemperatureLow size="20" color="#ffffff " />
+              <p className=" text-l font-light">
+                {`${temp_min} ${isCelsius ? "°C" : "°F"}`}
+              </p>
             </div>
           </div>
         </div>
+        ;
       </div>
     </ReactCardFlip>
   );
