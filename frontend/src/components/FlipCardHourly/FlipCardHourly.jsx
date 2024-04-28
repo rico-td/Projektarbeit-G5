@@ -61,8 +61,8 @@ function FlipCard({
         }}
         onClick={handleFlip}
       >
-        <div className="h-[100%] flex flex-col justify-evenly items-center">
-          <p className="font-extralight text-xl">{`${time12}`}</p>
+        <div className="h-[100%] flex flex-col justify-arround items-center">
+          <p className="font-extralight text-xl mt-2">{`${time12}`}</p>
           <div className="flex flex-col justify-center items-center">
             <div className="flex flex-col justify-center items-center my-5">
               <p className="text-4xl font-extralight">
@@ -73,7 +73,6 @@ function FlipCard({
                   src={`https://openweathermap.org/img/wn/${weatherIcon}@2x.png`}
                   alt=""
                 />
-                {/* <TiWeatherCloudy size="45" color="#ffffff" /> */}
                 <p className="">{main_description}</p>
               </div>
             </div>

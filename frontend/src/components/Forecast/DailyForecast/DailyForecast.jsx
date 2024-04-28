@@ -20,7 +20,7 @@ function DailyForecast({ dataDaily, sunrise, sunset, isCelsius }) {
 
   return (
     <div className="flex flex-col justify-center items-start w-[920px] h-[330px] my-3">
-      <p className=" w-[230px] mb-1 text-xl p-2 text-center text-white font-extralight bg-gray-500 bg-opacity-[0.5] rounded-l">
+      <p className=" w-[230px] mb-1 text-xl p-2 text-center text-white font-extralight bg-gray-500 bg-opacity-[0.5] rounded-xl">
         Daily Forecast 7 Days
       </p>
       <Swiper

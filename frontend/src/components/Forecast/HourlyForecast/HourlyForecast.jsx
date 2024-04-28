@@ -14,7 +14,7 @@ function DailyForecast({ dataHourly, isCelsius }) {
   }
   return (
     <div className="flex flex-col justify-center items-end w-[920px] h-[300px] -mt-[10px]">
-      <p className="mb-1 p-2 text-xl text-white font-extralight bg-gray-500 bg-opacity-[0.5] rounded-l">
+      <p className="mb-1 p-2 text-xl text-white font-extralight bg-gray-500 bg-opacity-[0.5] rounded-xl">
         Three-Hourly Forecast
       </p>
       <Swiper

@@ -33,19 +33,18 @@ function FlipCard({
         style={{ backgroundImage: `url(${img}) `, opacity: "0.8" }}
         onClick={handleFlip}
       >
-        <div className="h-[100%] flex flex-col justify-center items-center">
-          <p className="text-xl font-extralight">{date.slice(5)}</p>
+        <div className="h-[100%] flex flex-col justify-arround items-center">
+          <p className="text-xl font-extralight mt-2">{date.slice(5)}</p>
           <div className="flex flex-col justify-center items-center">
             <div className="flex flex-col justify-center items-center my-5">
               <p className="text-4xl font-extralight">
                 {" "}
                 {`${temperature} ${isCelsius ? "°C" : "°F"}`}
               </p>
-              <div className="flex flex-col justify-center items-center">
-                <TiWeatherCloudy size="45" color="#ffffff" />
-                <p className="">{description}</p>
-              </div>
+
+              <TiWeatherCloudy size="45" color="#ffffff" />
             </div>
+            <p className="">{description}</p>
           </div>
         </div>
       </div>
