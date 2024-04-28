@@ -11,7 +11,7 @@ const queryClient = new QueryClient();
 function App() {
   const [bg] = useState(bgImg);
   return (
-    <div style={{ backgroundImage: `url(${bg})` }}>
+    <div style={{ backgroundImage: `url(${bg}) ` }}>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Routes>

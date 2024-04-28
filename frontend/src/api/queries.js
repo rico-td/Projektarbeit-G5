@@ -1,4 +1,5 @@
 import api from "./api.js";
+import axios from "axios";
 
 async function fetchCurrentDay(cityName) {
   const result = await api.get("/api/getweather/currentday", {
@@ -6,7 +7,7 @@ async function fetchCurrentDay(cityName) {
   });
 
   const forecastToday = result.data.responseData;
-  console.log("RECEIVED FROM queries.js: ", forecastToday);
+  // console.log("RECEIVED FROM queries.js: ", forecastToday);
   return forecastToday;
 }
 
@@ -17,10 +18,10 @@ async function fetchCurrentDayHourlyData(latitude, longitude) {
   });
 
   const forecastCurrentDayHourly = result.data.responseData;
-  console.log(
-    "RECEIVED DATA FOR CURRENT DAY 3-HOURLY: ",
-    forecastCurrentDayHourly
-  );
+  // console.log(
+  //   "RECEIVED DATA FOR CURRENT DAY 3-HOURLY: ",
+  //   forecastCurrentDayHourly
+  // );
   return forecastCurrentDayHourly;
 }
 
@@ -31,8 +32,31 @@ async function fetchUpcomingDays(latitude, longitude) {
   });
 
   const forecastUpcomingDays = result.data.responseData;
-  console.log("RECEIVED DATA FOR UPCOMING DAYS: ", forecastUpcomingDays);
+  // console.log("RECEIVED DATA FOR UPCOMING DAYS: ", forecastUpcomingDays);
   return forecastUpcomingDays;
 }
 
-export { fetchCurrentDay, fetchCurrentDayHourlyData, fetchUpcomingDays };
+//  local time
+async function fetchLocalTime(lat, lon) {
+  const result = await api.get(
+    "http://api.timezonedb.com/v2.1/get-time-zone?key=498D21BNZC76&format=json&by=position",
+    {
+      params: {
+        lat: lat,
+        lng: lon,
+      },
+    }
+  );
+
+  const localTime = result.data.formatted;
+
+  console.log("RECEIVED DATA FOR LOCAL TIME: ", localTime);
+  return localTime;
+}
+
+export {
+  fetchCurrentDay,
+  fetchCurrentDayHourlyData,
+  fetchUpcomingDays,
+  fetchLocalTime,
+};

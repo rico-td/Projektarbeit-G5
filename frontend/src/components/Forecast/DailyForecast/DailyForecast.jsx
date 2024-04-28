@@ -10,9 +10,12 @@ import FlipCardDaily from "../../FlipCardDaily/FlipCardDaily.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 function DailyForecast({ dataDaily, sunrise, sunset, isCelsius }) {
-  // console.log("RECEIVED FROM DailyForecast.js:", data);
   if (!dataDaily) {
-    return <div></div>;
+    return (
+      <div className="flex justify-center items-center text-white m-20">
+        Loading...fetching Data
+      </div>
+    );
   }
 
   return (
