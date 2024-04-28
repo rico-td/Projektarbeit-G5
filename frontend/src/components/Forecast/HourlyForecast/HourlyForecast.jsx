@@ -50,6 +50,7 @@ function DailyForecast({ dataHourly, isCelsius }) {
               time={forecast.time}
               main_description={forecast.main_description}
               isCelsius={isCelsius}
+              weatherIcon={forecast.weather_icon}
             />
           </SwiperSlide>
         ))}

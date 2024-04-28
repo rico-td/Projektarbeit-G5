@@ -22,6 +22,7 @@ function FlipCard({
   sunrise,
   sunset,
   isCelsius,
+  weatherIcon,
 }) {
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -49,6 +50,7 @@ function FlipCard({
   // Convert the time to 12-hour format
   const time12 = formatTime(time);
 
+  console.log(weatherIcon);
   return (
     <ReactCardFlip flipDirection="horizontal" isFlipped={isFlipped}>
       <div
@@ -67,11 +69,11 @@ function FlipCard({
                 {`${temperature} ${isCelsius ? "°C" : "°F"}`}
               </p>
               <div className="flex flex-col justify-center items-center">
-                {/* <img
-                  src={`https://openweathermap.org/img/wn/${weathericon}@2x.png`}
+                <img
+                  src={`https://openweathermap.org/img/wn/${weatherIcon}@2x.png`}
                   alt=""
-                /> */}
-                <TiWeatherCloudy size="45" color="#ffffff" />
+                />
+                {/* <TiWeatherCloudy size="45" color="#ffffff" /> */}
                 <p className="">{main_description}</p>
               </div>
             </div>
