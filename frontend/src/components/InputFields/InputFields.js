@@ -10,6 +10,7 @@ function InputFields({
   onUnitsChange,
   setLat,
   setLon,
+  handlePosition,
 }) {
   const [inputValue, setInputValue] = useState("");
 
@@ -32,14 +33,17 @@ function InputFields({
     onUnitsChange(newValue); // Rufe die übergebene Funktion mit dem neuen Wert auf
   };
 
-  const onLocationClick = () => {
+  const onLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        const { latitude, longitude } = position.coords;
-        console.log(latitude);
-        console.log(longitude);
-        setLat(latitude);
-        setLon(longitude);
+        const newLat = position.coords.latitude;
+        const newLon = position.coords.longitude;
+        handlePosition(newLat, newLon);
+        // setLat(position.coords.latitude);
+        // setLon(position.coords.longitude);
+        onSearchChange("");
+
+        // console.log(lat, lon);
       });
     }
   };
@@ -69,7 +73,7 @@ function InputFields({
           <UilLocationPoint
             size={25}
             className="text-white cursor-pointer transition ease-out hover:scale-125 mx-1"
-            onClick={onLocationClick}
+            onClick={onLocation}
           />
 
           <button

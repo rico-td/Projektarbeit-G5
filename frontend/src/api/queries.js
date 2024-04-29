@@ -49,9 +49,29 @@ async function fetchLocalTime(lat, lon) {
   );
 
   const localTime = result.data.formatted;
+  // const countryCode = result.data.countryCode;
 
   console.log("RECEIVED DATA FOR LOCAL TIME: ", localTime);
   return localTime;
+}
+
+// Get current weather by lat and lon
+async function currentWeatherByLatAndLon(lat, lon) {
+  const result = await api.get(
+    "https://api.openweathermap.org/data/2.5/weather?appid=cceeb21005081f70dafeafa10dfdff59",
+    {
+      params: {
+        lat: lat,
+        lon: lon,
+      },
+    }
+  );
+
+  const forecastCurrentDay = result.data;
+  // const countryCode = result.data.countryCode;
+
+  console.log("RECEIVED DATA FOR LOCAL TIME: ", forecastCurrentDay);
+  return forecastCurrentDay;
 }
 
 export {
@@ -59,4 +79,5 @@ export {
   fetchCurrentDayHourlyData,
   fetchUpcomingDays,
   fetchLocalTime,
+  currentWeatherByLatAndLon,
 };

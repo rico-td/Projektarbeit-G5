@@ -13,6 +13,7 @@ import {
   fetchCurrentDay,
   fetchUpcomingDays,
   fetchLocalTime,
+  currentWeatherByLatAndLon,
 } from "../api/queries.js";
 
 // --------------------------------------------------------------------
@@ -38,6 +39,7 @@ const Home = () => {
 
         setLat(jsonHourly.latitudeCoordinateResponse);
         setLon(jsonHourly.longitudeCoordinateResponse);
+
         setDataHourly(jsonHourly);
       } catch (e) {
         console.log(e);
@@ -68,11 +70,9 @@ const Home = () => {
       }
     }
 
-    if (city) {
-      GetHourlyForecast(city);
-      GetDailyyForecast(lat, lon);
-      GetLocalTime(lat, lon);
-    }
+    GetHourlyForecast(city);
+    GetDailyyForecast(lat, lon);
+    GetLocalTime(lat, lon);
   }, [city, lat, lon]);
 
   // handlers
@@ -84,6 +84,11 @@ const Home = () => {
     setIsCelsius(newValue);
   };
 
+  const handlePosition = (newLat, newLon) => {
+    setLat(newLat);
+    setLon(newLon);
+  };
+
   // rendering
   return (
     <div className="flex flex-col items-center px-[20px] mx-auto w-[100vw] h-[100vh]">
@@ -92,6 +97,7 @@ const Home = () => {
           isCelcius={isCelsius}
           onUnitsChange={handleUnitsChange}
           onSearchChange={handleSearchChange}
+          handlePosition={handlePosition}
           setLat={setLat}
           setLon={setLon}
         />

@@ -50,7 +50,6 @@ function FlipCard({
   // Convert the time to 12-hour format
   const time12 = formatTime(time);
 
-  console.log(weatherIcon);
   return (
     <ReactCardFlip flipDirection="horizontal" isFlipped={isFlipped}>
       <div
