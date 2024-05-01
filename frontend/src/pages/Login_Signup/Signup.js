@@ -37,7 +37,7 @@ function Signup() {
 
   return (
     <div className="min-h-screen bg-gradient-to-r flex justify-center items-center">
-      <div className="bg-white shadow-md rounded p-8 max-w-md w-full">
+      <div className="bg-white shadow-md rounded-lg p-8 max-w-md w-full">
         <h2 className="text-2xl mb-4 text-center font-bold">Sign Up</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -53,7 +53,7 @@ function Signup() {
               name="name"
               value={name}
               onChange={handleInput}
-              className="form-input w-full rounded-md"
+              className="form-input w-full focus:outline-none font-light"
             />
           </div>
           <div className="mb-4">
@@ -69,7 +69,7 @@ function Signup() {
               name="email"
               value={email}
               onChange={handleInput}
-              className="form-input w-full rounded-md"
+              className="form-input w-full focus:outline-none font-light"
             />
           </div>
           <div className="mb-4">
@@ -85,29 +85,33 @@ function Signup() {
               name="password"
               value={password}
               onChange={handleInput}
-              className="form-input w-full rounded-md"
+              className="form-input w-full focus:outline-none font-light"
             />
           </div>
-          {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
+          {error && (
+            <div className="text-red-500 text-sm mb-4 text-center font-bold">
+              {error}
+            </div>
+          )}
           <button
             type="submit"
-            className="bg-blue-500 text-white w-full py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+            className="bg-orange-400 text-white w-full py-2 rounded-md hover:bg-orange-500 focus:outline-none focus:bg-orange-500"
           >
             Sign Up
           </button>
           <p className="text-xs mt-2 text-center">
             By signing up, you agree to our{" "}
-            <Link to="#" className="text-blue-500">
+            <Link to="#" className="text-orange-500">
               Terms
             </Link>{" "}
             and{" "}
-            <Link to="#" className="text-blue-500">
+            <Link to="#" className="text-orange-500">
               Privacy Policy
             </Link>
             .
           </p>
           <div className="text-center mt-4">
-            <Link to="/login" className="text-blue-500 hover:underline">
+            <Link to="/login" className="text-orange-500 hover:underline">
               Already have an account? Login here
             </Link>
           </div>

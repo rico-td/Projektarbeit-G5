@@ -27,13 +27,17 @@ function FlipCard({
   }
 
   return (
-    <ReactCardFlip flipDirection="horizontal" isFlipped={isFlipped}>
+    <ReactCardFlip
+      flipDirection="horizontal"
+      isFlipped={isFlipped}
+      className="w-[10em]"
+    >
       <div
         className={`${style.card}`}
         style={{ backgroundImage: `url(${img}) `, opacity: "0.8" }}
         onClick={handleFlip}
       >
-        <div className="h-[100%] flex flex-col justify-arround items-center">
+        <div className="h-[100%] w-[100%] flex flex-col justify-arround items-center">
           <p className="text-xl font-extralight mt-2">{date.slice(5)}</p>
           <div className="flex flex-col justify-center items-center">
             <div className="flex flex-col justify-center items-center my-5">

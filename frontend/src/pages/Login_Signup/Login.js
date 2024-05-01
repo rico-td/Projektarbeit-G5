@@ -58,7 +58,7 @@ function Login() {
         <Link to="/">
           <img className="rotate-180" src={logo} alt="" width="80px" />
         </Link>
-        <p className="font-light text-white">Home</p>
+        <p className="font-bold text-white">Home</p>
       </div>
       <div className="bg-white p-8 rounded-lg shadow-lg w-80">
         <h2 className="text-2xl mb-4 text-center font-bold">Login</h2>
@@ -76,7 +76,7 @@ function Login() {
               name="email"
               value={values.email}
               onChange={handleInput}
-              className="form-input w-full rounded-md"
+              className="form-input w-full focus:outline-none font-light"
             />
           </div>
           <div className="mb-4">
@@ -92,7 +92,7 @@ function Login() {
               name="password"
               value={values.password}
               onChange={handleInput}
-              className="form-input w-full rounded-md"
+              className="form-input w-full focus:outline-none  font-light"
             />
           </div>
           {errorMessage && (
@@ -100,8 +100,10 @@ function Login() {
           )}
           <button
             type="submit"
-            className={`bg-blue-500 text-white w-full py-2 rounded-md focus:outline-none focus:bg-blue-600 ${
-              isLoading ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-600"
+            className={`bg-orange-400 text-white w-full py-2 rounded-md focus:outline-none focus:bg-orange-500 ${
+              isLoading
+                ? "opacity-50 cursor-not-allowed"
+                : "hover:bg-orange-500"
             }`}
             disabled={isLoading}
           >
@@ -109,17 +111,17 @@ function Login() {
           </button>
           <p className="text-xs mt-2 text-center">
             By signing in, you agree to our{" "}
-            <Link to="#" className="text-blue-500">
+            <Link to="#" className="text-orange-500">
               Terms
             </Link>{" "}
             and{" "}
-            <Link to="#" className="text-blue-500">
+            <Link to="#" className="text-orange-500">
               Privacy Policy
             </Link>
             .
           </p>
           <div className="text-center mt-4">
-            <Link to="/signup" className="text-blue-500 hover:underline">
+            <Link to="/signup" className="text-orange-500 hover:underline">
               Create an account
             </Link>
           </div>

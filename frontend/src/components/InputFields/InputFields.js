@@ -57,7 +57,7 @@ function InputFields({
 
       <div className="flex justify-center items-center">
         <input
-          className="text-l font-light p-1.5 mr-5 shadow-xl focus:outline-none capitalize placeholder:lowercase rounded-2xl text-center"
+          className="w-[15em] text-l font-light p-1 mr-5 shadow-xl focus:outline-none capitalize placeholder:lowercase rounded-2xl text-center"
           type="search"
           placeholder="search for city..."
           value={inputValue}
