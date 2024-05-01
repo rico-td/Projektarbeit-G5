@@ -19,18 +19,34 @@ function DailyForecast({ dataDaily, sunrise, sunset, isCelsius }) {
   }
 
   return (
-    <div className="flex flex-col justify-center items-start w-[920px] h-[330px] my-3">
+    <div className="flex flex-col justify-center items-center w-[60vw] h-[320px] my-2">
       <p className=" w-[230px] mb-1 text-xl p-2 text-center text-white font-extralight bg-gray-500 bg-opacity-[0.5] rounded-xl">
         Daily Forecast 7 Days
       </p>
       <Swiper
+        className="flex justify-center items-center w-[100%] h-[100%] "
         grabCursor={true}
         loop={true}
-        spaceBetween={5}
+        spaceBetween={10}
         pagination={true}
-        slidesPerView={5}
         modules={[Pagination]}
-        className="w-[100%] h-[100%]"
+        breakpoints={{
+          1502: {
+            slidesPerView: 5,
+          },
+          1300: {
+            slidesPerView: 4,
+          },
+          896: {
+            slidesPerView: 3,
+          },
+          700: {
+            slidesPerView: 2,
+          },
+          588: {
+            slidesPerView: 2,
+          },
+        }}
       >
         {dataDaily.map((forecast, index) => (
           <SwiperSlide key={index}>

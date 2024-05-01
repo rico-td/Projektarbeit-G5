@@ -91,8 +91,8 @@ const Home = () => {
 
   // rendering
   return (
-    <div className="flex flex-col items-center px-[20px] mx-auto w-[100vw] h-[100vh]">
-      <div className="flex-col justify-start">
+    <div className="flex flex-col items-center justify-center px-[20px] w-[100vw] h-[100vh]">
+      <div className="flex flex-col justify-center items-center">
         <InputFields
           isCelcius={isCelsius}
           onUnitsChange={handleUnitsChange}
@@ -103,28 +103,30 @@ const Home = () => {
         />
 
         {DataHourly && !isLoading && (
-          <div className="">
-            <CurrentLocationAndTime
-              cityName={DataHourly?.cityNameResponse}
-              localTime={DataHourly?.cityNameResponse}
-              sunrise={DataHourly?.sunrise}
-              sunset={DataHourly?.sunset}
-              localDateAndTime={DataTime}
-            />
-          </div>
+          <CurrentLocationAndTime
+            cityName={DataHourly?.cityNameResponse}
+            localTime={DataHourly?.cityNameResponse}
+            sunrise={DataHourly?.sunrise}
+            sunset={DataHourly?.sunset}
+            localDateAndTime={DataTime}
+          />
         )}
 
-        <HourlyForecast
-          isCelsius={isCelsius}
-          dataHourly={DataHourly?.forecasts}
-        />
+        <div className="flex justify-center items-center">
+          <HourlyForecast
+            isCelsius={isCelsius}
+            dataHourly={DataHourly?.forecasts}
+          />
+        </div>
 
-        <DailyForecast
-          isCelsius={isCelsius}
-          dataDaily={DataDaily?.forecasts}
-          sunrise={DataDaily?.forecasts}
-          sunset={DataDaily?.forecasts}
-        />
+        <div className="flex justify-center items-center ">
+          <DailyForecast
+            isCelsius={isCelsius}
+            dataDaily={DataDaily?.forecasts}
+            sunrise={DataDaily?.forecasts}
+            sunset={DataDaily?.forecasts}
+          />
+        </div>
       </div>
     </div>
   );

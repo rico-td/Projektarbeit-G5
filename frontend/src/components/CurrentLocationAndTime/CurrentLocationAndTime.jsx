@@ -32,7 +32,7 @@ function CurrentLocationAndTime({ cityName, localDateAndTime }) {
   const date = convertDate(dateTimeString);
 
   return (
-    <div className="flex flex-col w-[320px] mt-[25px] py-3 cursor-default bg-gray-500 bg-opacity-[0.4] rounded-xl">
+    <div className="flex flex-col w-[320px] mt-5 py-2 cursor-default bg-gray-500 bg-opacity-[0.4] rounded-xl">
       <div className="flex justify-evenly">
         <img className="rotate-180" src={logo} alt="" width="80px" />
         <div className="flex flex-col">
