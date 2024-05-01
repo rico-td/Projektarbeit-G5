@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signupUser } from "../../api/userQueries";
-import bg from "../../assets/img/bg.jpg";
+
+import logo from "../../assets/img/logo.png";
 
 function Signup() {
   const [name, setName] = useState("");
@@ -36,7 +37,13 @@ function Signup() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r flex justify-center items-center">
+    <div className="flex flex-col justify-start py-20 items-center gap-10 min-h-screen bg-gradient-to-r">
+      <div className="flex flex-col justify-center items-center">
+        <Link to="/">
+          <img className="rotate-180" src={logo} alt="" width="80px" />
+        </Link>
+        <p className="font-bold text-white">Home</p>
+      </div>
       <div className="bg-white shadow-md rounded-lg p-8 max-w-md w-full">
         <h2 className="text-2xl mb-4 text-center font-bold">Sign Up</h2>
         <form onSubmit={handleSubmit}>
