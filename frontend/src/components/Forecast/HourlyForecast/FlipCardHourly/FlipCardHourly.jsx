@@ -5,24 +5,20 @@ import ReactCardFlip from "react-card-flip";
 
 import { WiHumidity } from "react-icons/wi";
 import { FaWind } from "react-icons/fa6";
-import { TiWeatherCloudy } from "react-icons/ti";
 import { FaTemperatureHigh, FaTemperatureLow } from "react-icons/fa";
 
-// import img from "../../assets/ForecastDay/flipImg.jpg";
-
 import img from "../../../../assets/ForecastDay/o3.png";
+
+import formatTime from "../../../../utils/formatTime";
 
 function FlipCard({
   temperature,
   main_description,
-  description,
   windSpeed,
   humidity,
   temp_min,
   temp_max,
   time,
-  sunrise,
-  sunset,
   isCelsius,
   weatherIcon,
 }) {
@@ -30,23 +26,6 @@ function FlipCard({
 
   function handleFlip() {
     setIsFlipped(!isFlipped);
-  }
-
-  function formatTime(time) {
-    // Split the time into hours and minutes
-    const [hours, minutes] = time.split(":");
-
-    // Convert hours to integer
-    let hh = parseInt(hours, 10);
-
-    // Determine AM or PM
-    const ampm = hh >= 12 ? "PM" : "AM";
-
-    // Convert hours to 12-hour format
-    hh = hh % 12 || 12;
-
-    // Format the time in 12-hour format
-    return `${hh}:${minutes} ${ampm}`;
   }
 
   // Convert the time to 12-hour format

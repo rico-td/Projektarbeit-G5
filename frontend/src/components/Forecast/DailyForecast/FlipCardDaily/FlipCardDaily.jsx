@@ -3,7 +3,6 @@ import style from "./FlipCardDaily.module.css";
 
 import ReactCardFlip from "react-card-flip";
 
-import { WiHumidity } from "react-icons/wi";
 import { FaWind } from "react-icons/fa6";
 import { TiWeatherCloudy } from "react-icons/ti";
 import { FaTemperatureHigh, FaTemperatureLow } from "react-icons/fa";
@@ -14,7 +13,6 @@ function FlipCard({
   temperature,
   description,
   windSpeed,
-  humidity,
   temp_min,
   temp_max,
   date,
