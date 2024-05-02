@@ -92,7 +92,7 @@ const Home = () => {
   // rendering
   return (
     <div className="flex flex-col items-center justify-center px-[20px] w-[100vw] h-[100vh]">
-      <div className="flex flex-col justify-center items-center">
+      <div className="flex flex-col justify-center items-center mt-8 md:mt-16 pt-4 md:pt-8">
         <InputFields
           isCelcius={isCelsius}
           onUnitsChange={handleUnitsChange}
