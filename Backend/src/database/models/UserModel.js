@@ -9,11 +9,12 @@ const UserModel = userSequelize.define(
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
+
       allowNull: false,
     },
     email: {
-        type: DataTypes.STRING,
-        allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     username: {
       type: DataTypes.STRING,
@@ -23,7 +24,6 @@ const UserModel = userSequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    
   },
   { tableName: "User_tb" }
 );

@@ -8,7 +8,7 @@ import { FaWind } from "react-icons/fa6";
 import { TiWeatherCloudy } from "react-icons/ti";
 import { FaTemperatureHigh, FaTemperatureLow } from "react-icons/fa";
 
-import img from "../../assets/ForecastDay/flipImg.jpg";
+import img from "../../../../assets/ForecastDay/o3.png";
 
 function FlipCard({
   temperature,

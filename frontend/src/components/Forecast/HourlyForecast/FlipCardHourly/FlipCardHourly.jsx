@@ -8,7 +8,9 @@ import { FaWind } from "react-icons/fa6";
 import { TiWeatherCloudy } from "react-icons/ti";
 import { FaTemperatureHigh, FaTemperatureLow } from "react-icons/fa";
 
-import img from "../../assets/ForecastDay/flipImg.jpg";
+// import img from "../../assets/ForecastDay/flipImg.jpg";
+
+import img from "../../../../assets/ForecastDay/o3.png";
 
 function FlipCard({
   temperature,
@@ -63,15 +65,15 @@ function FlipCard({
         <div className="h-[100%] flex flex-col justify-arround items-center">
           <p className="font-extralight text-xl mt-2">{`${time12}`}</p>
           <div className="flex flex-col justify-center items-center">
-            <div className="flex flex-col justify-center items-center my-5">
-              <p className="text-4xl font-extralight">
-                {`${temperature} ${isCelsius ? "°C" : "°F"}`}
-              </p>
+            <div className="flex flex-col justify-center items-center ">
+              <img
+                src={`https://openweathermap.org/img/wn/${weatherIcon}@2x.png`}
+                alt=""
+              />
               <div className="flex flex-col justify-center items-center">
-                <img
-                  src={`https://openweathermap.org/img/wn/${weatherIcon}@2x.png`}
-                  alt=""
-                />
+                <p className="text-4xl font-extralight">
+                  {`${temperature} ${isCelsius ? "°C" : "°F"}`}
+                </p>
                 <p className="">{main_description}</p>
               </div>
             </div>

@@ -2,7 +2,7 @@ import React from "react";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import FlipCardHourly from "../../FlipCardHourly/FlipCardHourly.jsx";
+import FlipCardHourly from "./FlipCardHourly/FlipCardHourly.jsx";
 import "./HourlyForecast.module.css";
 function DailyForecast({ dataHourly, isCelsius }) {
   if (!dataHourly) {

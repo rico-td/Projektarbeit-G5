@@ -5,11 +5,11 @@ import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
-import FlipCardDaily from "../../FlipCardDaily/FlipCardDaily.jsx";
+import FlipCardDaily from "./FlipCardDaily/FlipCardDaily.jsx";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
-function DailyForecast({ dataDaily, sunrise, sunset, isCelsius }) {
+function DailyForecast({ dataDaily, isCelsius }) {
   if (!dataDaily) {
     return (
       <div className="flex justify-center items-center text-white m-20">
@@ -35,6 +35,7 @@ function DailyForecast({ dataDaily, sunrise, sunset, isCelsius }) {
             slidesPerView: 5,
           },
           1300: {
+            className: "w-[50%]",
             slidesPerView: 4,
           },
           896: {

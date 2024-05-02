@@ -41,9 +41,8 @@ function InputFields({
         handlePosition(newLat, newLon);
         // setLat(position.coords.latitude);
         // setLon(position.coords.longitude);
-        onSearchChange("");
 
-        // console.log(lat, lon);
+        console.log(newLat, newLon);
       });
     }
   };

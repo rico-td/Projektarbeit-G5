@@ -51,7 +51,7 @@ async function fetchLocalTime(lat, lon) {
   const localTime = result.data.formatted;
   // const countryCode = result.data.countryCode;
 
-  console.log("RECEIVED DATA FOR LOCAL TIME: ", localTime);
+  // console.log("RECEIVED DATA FOR LOCAL TIME: ", localTime);
   return localTime;
 }
 
@@ -70,7 +70,7 @@ async function currentWeatherByLatAndLon(lat, lon) {
   const forecastCurrentDay = result.data;
   // const countryCode = result.data.countryCode;
 
-  console.log("RECEIVED DATA FOR LOCAL TIME: ", forecastCurrentDay);
+  // console.log("RECEIVED DATA FOR LOCAL TIME: ", forecastCurrentDay);
   return forecastCurrentDay;
 }
 
